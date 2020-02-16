@@ -1,0 +1,19 @@
+.nav{
+  width: 10%;
+  background-color: #c68f7d;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 10px;
+
+}
+.item {
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.item.active {
+  color: gold;
+}
