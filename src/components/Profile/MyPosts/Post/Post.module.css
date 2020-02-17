@@ -1,3 +1,8 @@
-.item {
-  color: greenyellow;
+.postItem {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.postItem img {
+  height: 10px;
+  width: 10px;
 }

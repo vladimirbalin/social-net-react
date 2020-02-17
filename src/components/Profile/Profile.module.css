@@ -1,4 +1,9 @@
-.content{
-  width: 90%;
-  background-color: mistyrose;
+.profile{
+
+
+}
+.profile .headerImg{
+  height: 100px;
+  width: 100%;
+  background: url('images/headerImg.jpg') left center repeat-x;
 }

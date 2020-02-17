@@ -1,11 +1,13 @@
-import s from "../MyPosts.module.css";
 import React from "react";
+import s from './Post.module.css'
 
-const Post = () => {
+const Post = (props) => {
   return (
-    <div className={s.item}>
-      post 1
+    <div className={s.postItem}>
+      <span>{props.message}</span>&nbsp;
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_coraz%C3%B3n.svg" alt=""/> <strong>{props.likes}</strong>
     </div>
+
   )
 };
 

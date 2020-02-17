@@ -1,0 +1,23 @@
+.dialogs {
+  display: flex;
+
+  justify-content: space-evenly;
+}
+.dialogsItems {
+
+}
+.dialogName{
+  font-size: 35px;
+}
+.dialogName .active{
+  color: gold;
+}
+.messages{
+  font-size: 25px;
+}
+.messageItem{
+
+}
+.dialog{
+
+}

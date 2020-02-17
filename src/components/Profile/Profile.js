@@ -1,15 +1,14 @@
 import React from 'react';
-import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import s from './Profile.module.css'
+
 
 const Profile = () => {
   return (
-    <div  className={s.content}>
-      <img style={{width: '100%', height: 100}} src='http://garrys.net.ua/wp-content/themes/linia/img/header-img.png'/>
-      <div>
-        <img style={{width: 120, height: 100}}src='https://seeklogo.com/images/H/hello-kitty-logo-1BB9766AB2-seeklogo.com.png'/>
-        ava descr
-      </div>
+    <div className={s.profile}>
+      <div className={s.headerImg}></div>
+      <ProfileInfo />
       <MyPosts />
     </div>
 

@@ -1,0 +1,8 @@
+.descriptionBlock {
+  padding: 15px;
+}
+.descriptionBlock .avatar {
+  border: 1px moccasin;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,.16);
+}
