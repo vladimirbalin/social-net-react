@@ -1,8 +1,22 @@
 .postItem {
   font-size: 14px;
   margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  border: 1px solid rgba(0,0,0,.15);
 }
+
 .postItem img {
-  height: 10px;
-  width: 10px;
+  height: 13px;
+  width: 13px;
+}
+.postItem .likes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5px;
+}
+.postItem strong {
+  line-height: 13px;
 }

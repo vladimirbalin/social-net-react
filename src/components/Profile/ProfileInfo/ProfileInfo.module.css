@@ -1,5 +1,6 @@
 .descriptionBlock {
   padding: 15px;
+  background-color: rgb(255, 246, 242);
 }
 .descriptionBlock .avatar {
   border: 1px moccasin;

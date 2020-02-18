@@ -5,7 +5,9 @@ const Post = (props) => {
   return (
     <div className={s.postItem}>
       <span>{props.message}</span>&nbsp;
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_coraz%C3%B3n.svg" alt=""/> <strong>{props.likes}</strong>
+      <div className={s.likes}>
+        <img src="assets/img/heart.svg" alt="heart"/> <strong>{props.likes}</strong>
+      </div>
     </div>
 
   )

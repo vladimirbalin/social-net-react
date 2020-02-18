@@ -1,5 +1,5 @@
 .nav{
-  width: 10%;
+  width: 15%;
   background-color: #c68f7d;
   display: flex;
   justify-content: flex-start;
@@ -7,10 +7,12 @@
   flex-direction: column;
   margin-right: 10px;
   padding-top: 10px;
+  box-shadow: -15px 5px 40px 2px rgba(0,0,0,0.25);
+
 }
 
-.active  {
-  color: gold !important
+.item.active  {
+  color: gold
 }
 .item {
   color: #fff;
