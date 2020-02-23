@@ -1,3 +1,24 @@
 .myPosts{
   padding: 10px;
 }
+.myPosts button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 10px 0;
+}
+.addPostArea{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.textarea{
+  width: 300px;
+  resize: none;
+}

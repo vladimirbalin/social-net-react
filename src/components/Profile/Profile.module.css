@@ -5,5 +5,5 @@
 .profile .headerImg{
   height: 200px;
   width: 100%;
-  background: url('img/sheeps.jpg') center center/cover no-repeat;
+  background: url('../../assets/img/sheeps.jpg') center center/cover no-repeat;
 }

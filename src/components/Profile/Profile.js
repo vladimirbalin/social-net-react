@@ -3,13 +3,15 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
 
-const Profile = (props) => {
+const Profile = ({profileComp, dispatch}) => {
+
   return (
     <div className={s.profile}>
       <div className={s.headerImg} />
 
       <ProfileInfo />
-      <MyPosts postData={props.profileComp.postData} />
+      <MyPosts profileComp={profileComp}
+               dispatch={dispatch} />
     </div>
   );
 };
