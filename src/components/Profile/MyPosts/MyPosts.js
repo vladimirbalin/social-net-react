@@ -1,18 +1,17 @@
 import React from 'react';
 import Post from "./Post/Post";
 import s from './MyPosts.module.css';
-import { addPostActionCreator, updateBySymbolActionCreator } from "../../../redux/profile-reducer";
 
 
-const MyPosts = ({profileComp, dispatch}) => {
-  const postData = profileComp.postData;
+const MyPosts = ({ addPost, updateNewPostText, state }) => {
+  const postData = state.postData;
 
   const clickHandler = () => {
-    dispatch(addPostActionCreator());
+    addPost();
   };
 
   const changeHandler = (event) => {
-    dispatch(updateBySymbolActionCreator(event.target.value))
+    updateNewPostText(event.target.value)
   };
 
   return (
@@ -22,7 +21,7 @@ const MyPosts = ({profileComp, dispatch}) => {
           <div className={s.addPostArea}>
             <textarea onChange={changeHandler}
                       className={s.textarea}
-                      value={profileComp.newPostText} />
+                      value={state.newPostText} />
             <button onClick={clickHandler}>Add post</button>
           </div>
           {postData.map(el => <Post message={el.message}

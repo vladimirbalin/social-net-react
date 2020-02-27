@@ -9,7 +9,7 @@ let initialState = {
     {id:4, name:'Dasha'},
     {id:5, name:'Maria'},
   ],
-  dialogsMessagesData: [
+  dialogsMessages: [
     {id:1, message:'Hi'},
     {id:2, message:'Howre doing Howre doing Howre doing Howre doing Howre doing Howre doing'},
     {id:3, message:'Mkay'},
@@ -21,16 +21,20 @@ const dialogsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ADD_MESSAGE:
-      let newMessage = {
-        id: id++,
-        message: state.newMessageText
+      return {
+        ...state,
+        dialogsMessages: [...state.dialogsMessages,
+                          { id: id++,
+                            message: state.newMessageText
+                          }],
+        newMessageText: ''
       };
-      state.dialogsMessagesData.push(newMessage);
-      state.newMessageText = '';
-      return state;
     case UPDATE_BY_SYMBOL_DIALOGS:
-      state.newMessageText = action.newMessageText;
-      return state;
+      return {
+        ...state,
+        newMessageText: action.newMessageText
+      };
+
     default:
       return state;
   }
