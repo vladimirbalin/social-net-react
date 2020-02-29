@@ -4,7 +4,8 @@ let id = 100;
 
 let initialState = {
   postData: [
-    {id: 1, message: 'Hi, how are you??Hi, how are you??Hi, how are you??Hi, how are you??Hi, how are you??Hi, how are you??', likesCount: 25},
+    {id: 1, message: 'Hi, how are you??Hi, how are you??Hi, how are you??' +
+        'Hi, how are you??Hi, how are you??Hi, how are you??', likesCount: 25},
     {id: 2, message: 'That\'s my first message', likesCount: 15},
     {id: 3, message: 'Hi, how are you??', likesCount: 39},
   ],

@@ -1,5 +1,7 @@
-import React from "react";
-import { addMessageActionCreator, updateBySymbolDialogsActionCreator } from "../../redux/dialogs-reducer";
+import {
+  sendMessage,
+  updateBySymbolDialogs,
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
 
@@ -10,13 +12,13 @@ let mapStateToProps = (state) => {
   }
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    updateBySymbolDialogs: (text) => {dispatch(updateBySymbolDialogsActionCreator(text))},
-    sendMessage: () => {dispatch(addMessageActionCreator())}
-  }
-};
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     updateBySymbolDialogs: (text) => {dispatch(updateBySymbolDialogsActionCreator(text))},
+//     sendMessage: () => {dispatch(addMessageActionCreator())}
+//   }
+// };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, {updateBySymbolDialogs, sendMessage})(Dialogs);
 
 export default DialogsContainer;

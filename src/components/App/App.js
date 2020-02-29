@@ -10,7 +10,7 @@ import News from "../News/News";
 import DialogsContainer from "../Dialogs/DialogsContainer";
 import UsersContainer from "../Users/UsersContainer";
 
-const App = ({ store }) => {
+const App = () => {
 
   return (
     <BrowserRouter>
