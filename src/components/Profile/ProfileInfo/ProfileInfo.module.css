@@ -1,9 +1,11 @@
-.descriptionBlock {
-  padding: 15px;
-  background-color: rgb(255, 246, 242);
-}
+
 .descriptionBlock .avatar {
-  border: 1px moccasin;
+  border: none;
+  display: block;
   border-radius: 10px;
-  box-shadow: 0 4px 20px 0 rgba(0,0,0,.16);
+}
+.descriptionBlock .subtitles {
+  color: #4b4b4b;
+  font-size: 14px;
+  font-style: italic;
 }

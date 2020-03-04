@@ -5,7 +5,7 @@ import s from './Preloader.module.css'
 const Loader = (props) => {
   return (
     <div className={s.preloader}>
-      <img src={loaderSvg} />
+      <img src={loaderSvg} alt='loader' />
     </div>
   )
 };

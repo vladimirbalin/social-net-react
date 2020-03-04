@@ -3,15 +3,14 @@ import Post from "./Post/Post";
 import s from './MyPosts.module.css';
 
 
-const MyPosts = ({ addPost, updateNewPostText, state }) => {
-  const postData = state.postData;
+const MyPosts = ({ addPost, updateBySymbol, newPostText, postData }) => {
 
   const clickHandler = () => {
     addPost();
   };
 
   const changeHandler = (event) => {
-    updateNewPostText(event.target.value)
+    updateBySymbol(event.target.value)
   };
 
   return (
@@ -21,7 +20,7 @@ const MyPosts = ({ addPost, updateNewPostText, state }) => {
           <div className={s.addPostArea}>
             <textarea onChange={changeHandler}
                       className={s.textarea}
-                      value={state.newPostText} />
+                      value={newPostText} />
             <button onClick={clickHandler}>Add post</button>
           </div>
           {postData.map(el => <Post message={el.message}

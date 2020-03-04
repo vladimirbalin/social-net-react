@@ -1,6 +1,7 @@
 import s from "./Users.module.css";
 import photoUrl from "../../assets/img/dmitriy.jpg";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 
 let Users = (props) => {
@@ -9,12 +10,6 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++){
     pages.push(i);
   }
-  const unfollowHandler = (id) => {
-    props.unFollow(id);
-  };
-  const followHandler = (id) => {
-    props.follow(id);
-  };
 
   return (
     <div className={s.users}>
@@ -30,11 +25,14 @@ let Users = (props) => {
           <div className={s.users__item} key={u.id}>
             <div className={s.users__left}>
               <div>
-                <img src={u.photos.small === null ? photoUrl : u.photos.small} alt='userphoto'/>
-              </div>
+                <NavLink to={'/profile/' + u.id}>
+                  <img src={u.photos.small === null ? photoUrl : u.photos.small} alt='userphoto'/>
+                </NavLink>
+                </div>
               <div>
-                {u.followed ? <span onClick={() => unfollowHandler(u.id)}>Unfollow</span> :
-                  <span onClick={() => followHandler(u.id)}>Follow</span>}
+                {u.followed ?
+                  <span onClick={() => props.unFollow(u.id)}>Unfollow</span> :
+                  <span onClick={() => props.follow(u.id)}>Follow</span>}
               </div>
             </div>
             <div className={s.users__right}>
