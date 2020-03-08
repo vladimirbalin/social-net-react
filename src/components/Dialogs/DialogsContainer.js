@@ -4,14 +4,16 @@ import {
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
+import { LoginHOC } from "../hocLogin/LoginHOC";
+import { compose } from "redux";
 
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
-    state: state.dialogsComp
+    state: state.dialogsComp,
   }
 };
-
+const mapDispatchToProps = {updateBySymbolDialogs, sendMessage};
 // let mapDispatchToProps = (dispatch) => {
 //   return {
 //     updateBySymbolDialogs: (text) => {dispatch(updateBySymbolDialogsActionCreator(text))},
@@ -19,4 +21,10 @@ let mapStateToProps = (state) => {
 //   }
 // };
 
-export default connect(mapStateToProps, {updateBySymbolDialogs, sendMessage})(Dialogs);
+
+export default compose(
+  LoginHOC,
+  connect(mapStateToProps, mapDispatchToProps),
+
+)(Dialogs);
+

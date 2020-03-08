@@ -10,7 +10,7 @@ const MyPosts = ({ addPost, updateBySymbol, newPostText, postData }) => {
   };
 
   const changeHandler = (event) => {
-    updateBySymbol(event.target.value)
+    updateBySymbol(event.target.value);
   };
 
   return (

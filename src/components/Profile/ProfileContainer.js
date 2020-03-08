@@ -1,27 +1,43 @@
 import React from 'react';
 import Profile from "./Profile";
-import * as axios from "axios";
 import { connect } from "react-redux";
-import { setUserProfile } from "../../redux/profile-reducer";
+import {
+  getUserStatusThunk,
+  setUserProfile,
+  setUserProfileThunk,
+  setUserStatusThunk,
+  updateBySymbolStatus
+} from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
+import { LoginHOC } from "../hocLogin/LoginHOC";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userID = this.props.match.params.userID || 2;
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-      .then(response => {
-        this.props.setUserProfile(response.data)
-      });
+    this.props.setUserProfileThunk(this.props.match.params.userID);
+    this.props.getUserStatusThunk(this.props.match.params.userID);
   };
+
   render() {
     return (
-      <Profile {...this.props} profile={this.props.profile} />
+      <Profile profile={this.props.profile}
+               status={this.props.status}
+               setUserStatusThunk={this.props.setUserStatusThunk}
+      />
     );
   };
 }
 
-let mapStateToProps = (state) => ({
-  profile: state.profileComp.profile
+const mapStateToProps = (state) => ({
+  profile: state.profileComp.profile,
+  status: state.profileComp.status
 });
+const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk};
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+
+export default compose(
+  // LoginHOC,
+  connect(mapStateToProps, mapDispatchToProps),
+
+  withRouter,
+)(ProfileContainer);

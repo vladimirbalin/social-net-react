@@ -1,5 +1,5 @@
 import s from "./Users.module.css";
-import photoUrl from "../../assets/img/dmitriy.jpg";
+import userSvg from '../../assets/img/user.svg';
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
-  for (let i = 1; i <= pagesCount; i++){
+  for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
@@ -21,18 +21,27 @@ let Users = (props) => {
         })}
       </ul>
       {props.users.map(u => {
+        let isCurrentUserFetching = props.isButtonDisabled.some(el => el === u.id);
+        let cursorStyle = isCurrentUserFetching ? {'cursor': 'default'} : {'cursor': 'pointer'};
+        let followButton;
+        u.followed ?
+          followButton = <button onClick={() => props.unFollow(u.id)}
+                                 disabled={isCurrentUserFetching}
+                                 style={cursorStyle}>Unfollow</button> :
+          followButton = <button onClick={() => props.follow(u.id)}
+                                 disabled={isCurrentUserFetching}
+                                 style={cursorStyle}>Follow</button>;
+
         return (
           <div className={s.users__item} key={u.id}>
             <div className={s.users__left}>
               <div>
                 <NavLink to={'/profile/' + u.id}>
-                  <img src={u.photos.small === null ? photoUrl : u.photos.small} alt='userphoto'/>
+                  <img src={u.photos.small === null ? userSvg : u.photos.small} alt='userphoto'/>
                 </NavLink>
-                </div>
+              </div>
               <div>
-                {u.followed ?
-                  <span onClick={() => props.unFollow(u.id)}>Unfollow</span> :
-                  <span onClick={() => props.follow(u.id)}>Follow</span>}
+                {followButton}
               </div>
             </div>
             <div className={s.users__right}>

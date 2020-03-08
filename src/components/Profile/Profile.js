@@ -7,9 +7,12 @@ const Profile = (props) => {
   return (
     <div className={s.profile}>
       <div className={s.headerImg}>
-        <ProfileInfo profile={props.profile} />
+        <ProfileInfo profile={props.profile}
+                     status={props.status}
+                     setUserStatusThunk={props.setUserStatusThunk}
+        />
       </div>
-      <MyPostsContainer />
+      <MyPostsContainer/>
     </div>
   );
 };
