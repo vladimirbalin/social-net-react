@@ -1,33 +1,32 @@
+import s from "./Login.module.css";
 import React from "react";
-import { Field, reduxForm } from "redux-form";
-import s from './Login.module.css';
+import LoginForm from "./LoginForm";
+import { AuthAPI } from "../../api/api";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAuthThunk } from "../../redux/auth-reducer";
 
 const Login = (props) => {
-  return <div className={s.loginPage}>
+  const onSubmit = (formData) => {
+    AuthAPI.login(formData)
+      .then(data => {
+        console.log(data);
+         if(data.resultCode === 0) {
+           props.setAuthThunk();
+         }
+      })
+  };
+
+  return props.state ? <Redirect to={'/profile'}/> : <div className={s.loginPage}>
     <h1>Залогиньтесь пожалуйста</h1>
-    <LoginForm />
+    <LoginForm onSubmit={onSubmit}/>
   </div>
 };
 
-let LoginForm = (props) => {
-  return <form onSubmit={props.handleSubmit}>
-    <div className={s.formItems}>
-      <label className={s.formItem}>Login</label>
-      <Field name='login' placeholder={'login'} component='input' type='text' className={s.formItem}/>
-    </div>
-    <div className={s.formItems}>
-      <label className={s.formItem}>Password</label>
-      <Field name='password' placeholder={'password'} component='input' type='text' className={s.formItem}/>
-    </div>
-    <div className={s.checkbox}>
-      <label htmlFor='rememberMe'>Запомнить меня</label>
-      <Field name='rememberMe' id='rememberMe' component='input' type='checkbox' />
-    </div>
+const mapStateToProps = (state) => ({
+  state: state.auth.isAuth
+});
 
-    <button type='submit'>Submit</button>
-  </form>
-};
 
-LoginForm = reduxForm({form: 'login'})(LoginForm);
 
-export default Login;
+export default connect(mapStateToProps, {setAuthThunk})(Login);

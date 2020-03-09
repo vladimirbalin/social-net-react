@@ -16,7 +16,6 @@ let initialState = {
     {id: 2, message: 'That\'s my first message', likesCount: 15},
     {id: 3, message: 'Hi, how are you??', likesCount: 39},
   ],
-  newPostText: '',
   profile: null,
   status: ''
 };
@@ -28,19 +27,18 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newPost = {
         id: id++,
-        message: state.newPostText,
+        message: action.text,
         likesCount: 0
       };
       return {
         ...state,
-        postData: [...state.postData, newPost],
-        newPostText: ''
+        postData: [...state.postData, newPost]
       };
-    case UPDATE_BY_SYMBOL:
-      return {
-        ...state,
-        newPostText: action.text
-      };
+    // case UPDATE_BY_SYMBOL:
+    //   return {
+    //     ...state,
+    //     newPostText: action.text
+    //   };
     case UPDATE_BY_SYMBOL_STATUS:
       return {
         ...state,
@@ -62,10 +60,10 @@ const profileReducer = (state = initialState, action) => {
 };
 
 
-export const addPost = () => ({type: ADD_POST});
+export const addPost = (text) => ({type: ADD_POST, text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-export const updateBySymbol = (text) => ({type: UPDATE_BY_SYMBOL, text});
+// export const updateBySymbol = (text) => ({type: UPDATE_BY_SYMBOL, text});
 
 export const setUserProfileThunk = (userId) => {
   return (dispatch) => {

@@ -35,9 +35,6 @@ export const UsersAPI = {
         return response.data;
       })
   },
-
-
-
 };
 
 export const AuthAPI = {
@@ -47,6 +44,12 @@ export const AuthAPI = {
         return response.data;
       })
   },
+  login(postForm){
+    return instance.post('/auth/login', postForm)
+      .then(response => {
+        return response.data;
+      })
+  }
 };
 
 export const ProfileAPI = {

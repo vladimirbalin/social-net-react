@@ -50,8 +50,7 @@ let Users = (props) => {
                 <div>{u.status === null ? 'no status' : u.status}</div>
               </div>
               <div className={s.users__location}>
-                <div>country: {'u.location.country'}</div>
-                <div>city: {'u.location.city'}</div>
+                <div>id: {u.id}</div>
               </div>
             </div>
           </div>

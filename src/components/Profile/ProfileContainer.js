@@ -6,10 +6,8 @@ import {
   setUserProfile,
   setUserProfileThunk,
   setUserStatusThunk,
-  updateBySymbolStatus
 } from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
-import { LoginHOC } from "../hocLogin/LoginHOC";
 import { compose } from "redux";
 
 class ProfileContainer extends React.Component {

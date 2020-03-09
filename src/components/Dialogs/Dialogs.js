@@ -1,17 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import DialogName from "./DialogName/DialogName";
 import MessageItem from "./MessageItem/MessageItem";
+import DialogsForm from "./DialogsForm";
 
 
-const Dialogs = ({sendMessage, updateBySymbolDialogs, state, isAuth}) => {
+const Dialogs = ({sendMessage, updateBySymbolDialogs, state}) => {
 
-  const clickHandler = () => {
-    sendMessage();
+  const clickHandler = (formData) => {
+    sendMessage(formData.dialogsTextarea);
+    formData.dialogsTextarea = '';
   };
-  const changeHandler = (event) => {
-    updateBySymbolDialogs(event.target.value);
-  };
+  // const changeHandler = (event) => {
+  //   updateBySymbolDialogs(event.target.value);
+  // };
 
   return (
     <div className={s.dialogs}>
@@ -28,14 +30,10 @@ const Dialogs = ({sendMessage, updateBySymbolDialogs, state, isAuth}) => {
                        key={el.id}/>)}
         </div>
 
-        <div className={s.addingMesArea}>
-          <textarea onChange={changeHandler}
-                    value={state.newMessageText}/>
-
-          <button onClick={clickHandler}>add message</button>
-        </div>
+        <DialogsForm onSubmit={clickHandler}/>
       </div>
-    </div>)
+    </div>
+  )
 };
 
 export default Dialogs;

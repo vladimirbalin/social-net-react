@@ -1,5 +1,5 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_BY_SYMBOL_DIALOGS = 'UPDATE-BY-SYMBOL-DIALOGS';
+// const UPDATE_BY_SYMBOL_DIALOGS = 'UPDATE-BY-SYMBOL-DIALOGS';
 let id = 100;
 let initialState = {
   dialogsNameData: [
@@ -13,8 +13,7 @@ let initialState = {
     {id:1, message:'Hi'},
     {id:2, message:'Howre doing Howre doing Howre doing Howre doing Howre doing Howre doing'},
     {id:3, message:'Mkay'},
-  ],
-  newMessageText: ''
+  ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -25,15 +24,14 @@ const dialogsReducer = (state = initialState, action) => {
         ...state,
         dialogsMessages: [...state.dialogsMessages,
                           { id: id++,
-                            message: state.newMessageText
-                          }],
-        newMessageText: ''
+                            message: action.newMessageText
+                          }]
       };
-    case UPDATE_BY_SYMBOL_DIALOGS:
-      return {
-        ...state,
-        newMessageText: action.newMessageText
-      };
+    // case UPDATE_BY_SYMBOL_DIALOGS:
+    //   return {
+    //     ...state,
+    //     newMessageText: action.newMessageText
+    //   };
 
     default:
       return state;
@@ -41,12 +39,13 @@ const dialogsReducer = (state = initialState, action) => {
 
 };
 
-export const sendMessage = () => ({ type: ADD_MESSAGE });
-export const updateBySymbolDialogs = (text) => (
-  {
-    type: UPDATE_BY_SYMBOL_DIALOGS,
-    newMessageText: text
-  }
-);
+export const sendMessage = (text) => ({ type: ADD_MESSAGE, newMessageText: text });
+// export const sendMessage = () => ({ type: ADD_MESSAGE });
+// export const updateBySymbolDialogs = (text) => (
+//   {
+//     type: UPDATE_BY_SYMBOL_DIALOGS,
+//     newMessageText: text
+//   }
+// );
 
 export default dialogsReducer;
