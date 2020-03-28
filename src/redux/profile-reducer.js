@@ -1,7 +1,6 @@
-import { ProfileAPI } from "../api/api";
+import { ProfileAPI } from "../services/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_BY_SYMBOL = 'UPDATE_BY_SYMBOL';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPDATE_BY_SYMBOL_STATUS = 'UPDATE_BY_SYMBOL_STATUS';
@@ -34,11 +33,6 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         postData: [...state.postData, newPost]
       };
-    // case UPDATE_BY_SYMBOL:
-    //   return {
-    //     ...state,
-    //     newPostText: action.text
-    //   };
     case UPDATE_BY_SYMBOL_STATUS:
       return {
         ...state,
@@ -63,19 +57,18 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (text) => ({type: ADD_POST, text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-// export const updateBySymbol = (text) => ({type: UPDATE_BY_SYMBOL, text});
 
-export const setUserProfileThunk = (userId) => {
+export const setUserProfileThunk = (userId = 6234) => {
   return (dispatch) => {
-    ProfileAPI.setProfile(userId || 6234)
+    ProfileAPI.setProfile(userId)
       .then(data => {
         dispatch(setUserProfile(data))
       });
   }
 };
-export const getUserStatusThunk = (userId) => {
+export const getUserStatusThunk = (userId = 6234) => {
   return (dispatch) => {
-    ProfileAPI.getStatus(userId || 6234)
+    ProfileAPI.getStatus(userId)
       .then(data => {
         dispatch(setUserStatus(data))
       });

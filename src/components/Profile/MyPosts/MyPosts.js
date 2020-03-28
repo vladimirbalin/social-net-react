@@ -7,14 +7,14 @@ import MyPostsForm from "./MyPostsForm";
 const MyPosts = ({addPost, postData}) => {
 
   const clickHandler = (formData) => {
-    addPost(formData.addPostTextarea);
+    addPost(formData.addPostTextArea);
     formData.addPostTextarea = '';
   };
 
 
   return (
     <div className={s.myPosts}>
-      <h3>My posts</h3>
+
       <div>
         <MyPostsForm onSubmit={clickHandler}/>
         {postData.map(el => <Post message={el.message}

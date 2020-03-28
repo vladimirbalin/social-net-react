@@ -1,8 +1,9 @@
 .myPosts{
+  width: 50%;
   padding: 10px;
 }
 .myPosts button{
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 5px 22px;
@@ -12,13 +13,21 @@
   font-size: 14px;
   margin: 10px 0;
 }
-.addPostArea{
-  width: 300px;
+.addPostAreaX {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
-.textarea{
-  width: 100%;
+
+.addPostAreaX label {
+  text-align: left;
+  margin-bottom: 10px;
+}
+.addPostAreaX textarea {
+  width: 60%;
   resize: none;
+  border: 2px solid transparent;
+  transition: .5s border-color;
+}
+.addPostAreaX .inputPlusErrorSpan {
+  display: flex;
 }

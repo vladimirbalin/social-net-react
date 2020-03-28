@@ -2,7 +2,7 @@
 .descriptionBlock .avatar {
   border: none;
   display: block;
-  border-radius: 10px;
+  margin-bottom: 10px;
 }
 .descriptionBlock .subtitles {
   color: #4b4b4b;

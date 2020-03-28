@@ -1,0 +1,38 @@
+.flex{
+  display: flex;
+  flex-basis: 350px;
+}
+.error textarea {
+  border-color: red;
+}
+.width{
+  flex-basis: 80%;
+  display: flex;
+  align-items: center;
+}
+.error input {
+  border: 2px solid red;
+}
+
+form span {
+  width: 40%;
+  margin-left: 10px;
+  color: red;
+}
+
+.active :global {
+  animation: .5s ticking;
+}
+
+@keyframes :global(ticking) {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+
+}

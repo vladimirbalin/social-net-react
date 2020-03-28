@@ -1,4 +1,4 @@
-import { AuthAPI } from "../api/api";
+import { AuthAPI } from "../services/api";
 
 const TO_AUTH = 'TO_AUTH';
 
@@ -6,7 +6,7 @@ let initialState = {
   login: null,
   email: null,
   userId: null,
-  isAuth: false
+  isAuth: false,
 };
 
 
@@ -20,13 +20,14 @@ const authReducers = (state = initialState, action) => {
         isAuth: true
       };
 
+
     default:
       return state;
   }
 };
 
 
-export const setAuth = (login, email, userId) => ({type: TO_AUTH, authInfo: {login, email, userId}});
+const setAuth = (login, email, userId) => ({type: TO_AUTH, authInfo: {login, email, userId}});
 export const setAuthThunk = () => {
   return (dispatch) => {
     AuthAPI.auth()

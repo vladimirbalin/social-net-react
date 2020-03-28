@@ -6,13 +6,15 @@ import Loader from "../common/Loader/Loader";
 import { LoginHOC } from "../hocLogin/LoginHOC";
 import { compose } from "redux";
 
-class UsersContainer extends React.Component {
+class UsersContainer extends React.Component{
   componentDidMount() {
-    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
-  };
+    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+  }
 
-  clickPageHandler = (pageClicked) => {
-    this.props.setCurrentPageThunk(pageClicked, this.props.pageSize);
+  clickPageHandler = pageClicked => {
+    if (pageClicked !== this.props.currentPage) {
+      this.props.setCurrentPageThunk(pageClicked, this.props.pageSize)
+    }
   };
   followHandler = (userId) => {
     this.props.followThunk(userId);
@@ -31,8 +33,8 @@ class UsersContainer extends React.Component {
         />
     )
   }
-}
 
+}
 const mapStateToProps = state => {
   return {
     users: state.usersComp.users,
@@ -53,5 +55,4 @@ const mapDispatchToProps = {
 export default compose(
   LoginHOC,
   connect(mapStateToProps, mapDispatchToProps),
-
 )(UsersContainer);

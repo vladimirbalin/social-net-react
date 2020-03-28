@@ -9,6 +9,8 @@ import {
 } from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import { LoginHOC } from "../hocLogin/LoginHOC";
+import Content from "../common/Content/Content";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -34,8 +36,7 @@ const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusTh
 
 
 export default compose(
-  // LoginHOC,
+  LoginHOC,
   connect(mapStateToProps, mapDispatchToProps),
-
   withRouter,
 )(ProfileContainer);

@@ -1,4 +1,6 @@
 import React from "react";
+import { compose } from "redux";
+import { LoginHOC } from "../hocLogin/LoginHOC";
 
 const  News = (props) => {
   return (
@@ -8,4 +10,6 @@ const  News = (props) => {
   )
 };
 
-export default News;
+export default compose(
+  LoginHOC,
+)(News);

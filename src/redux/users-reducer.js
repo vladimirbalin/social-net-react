@@ -1,4 +1,4 @@
-import { UsersAPI } from "../api/api";
+import { UsersAPI } from "../services/api";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -10,7 +10,7 @@ const BUTTON_IS_DISABLED = 'BUTTON_IS_DISABLED';
 
 let initialState = {
   users: [],
-  pageSize: 5,
+  pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
@@ -87,9 +87,7 @@ export const getUsersThunk = (currentPage, pageSize) => {
       .then(data => {
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(data.items));
-
-        const tooManyPages = data.totalCount > 75 ? 75 : data.totalCount;
-        dispatch(setTotalUsersCount(tooManyPages));
+        dispatch(setTotalUsersCount(data.totalCount));
       });
   }
 };
