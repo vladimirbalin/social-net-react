@@ -1,26 +1,28 @@
 import s from "./Login.module.css";
 import React from "react";
 import LoginForm from "./LoginForm";
-import { AuthAPI } from "../../api/api";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAuthThunk } from "../../redux/auth-reducer";
+import { loginThunk } from "../../redux/auth-reducer";
+import HeaderContainer from "../Header/HeaderContainer";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    AuthAPI.login(formData)
-      .then(data => {
-        console.log(data);
-         if(data.resultCode === 0) {
-           props.setAuthThunk();
-         }
-      })
+    props.loginThunk(formData)
   };
 
-  return props.state ? <Redirect to={'/profile'}/> : <div className={s.loginPage}>
-    <h1>Залогиньтесь пожалуйста</h1>
-    <LoginForm onSubmit={onSubmit}/>
-  </div>
+  return props.state ? <Redirect to={'/profile'}/> :
+      <div className='app-wrapper'>
+        <HeaderContainer/>
+        <div className='middle'>
+          <div className='app-wrapper-content'>
+            <div className={s.loginPage}>
+              <h1>Залогиньтесь пожалуйста</h1>
+              <LoginForm onSubmit={onSubmit}/>
+            </div>
+          </div>
+        </div>
+      </div>
 };
 
 const mapStateToProps = (state) => ({
@@ -28,5 +30,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-
-export default connect(mapStateToProps, {setAuthThunk})(Login);
+export default connect(mapStateToProps, {loginThunk})(Login);

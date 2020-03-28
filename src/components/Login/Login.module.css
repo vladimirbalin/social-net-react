@@ -4,5 +4,7 @@ h1 {
 }
 
 .loginPage {
+  margin: 0 auto;
+  width: max-content;
   padding: 20px 0 0 20px;
 }

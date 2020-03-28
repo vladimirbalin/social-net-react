@@ -55,12 +55,17 @@
   justify-content: center;
   list-style: none;
 }
-.pages li {
+.pages .pages__links{
+  color: #000000;
+  text-decoration: none;
+}
+.pages .lis {
   font-size: 25px;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.selected {
+.pages .pages__selected {
   color: #ff7008;
+  cursor: default;
 }

@@ -23,13 +23,17 @@
 }
 
 label {
-  text-align: right;
+  text-align: left;
 }
 
 .checkbox {
+  padding: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
+}
+.checkbox input {
+  margin-left: 10px;
 }
 
 .form button {

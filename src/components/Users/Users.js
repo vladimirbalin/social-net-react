@@ -2,24 +2,26 @@ import s from "./Users.module.css";
 import userSvg from '../../assets/img/user.svg';
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 
-let Users = (props) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+export default function Users(props) {
 
   return (
     <div className={s.users}>
-      <ul className={s.pages}>
-        {pages.map((p, idx) => {
+      <Pagination activePage={props.currentPage}
+                  itemsCountPerPage={props.pageSize}
+                  totalItemsCount={props.totalUsersCount}
+                  pageRangeDisplayed={10}
+                  onChange={props.clickPageHandler}
+                  innerClass={s.pages}
+                  itemClass={s.lis}
+                  activeLinkClass={s.pages__selected}
+                  linkClass={s.pages__links}
+                  hideDisabled={true}
+                  hideNavigation={true}
+      />
 
-          return <li key={idx} className={props.currentPage === p ? s.selected : null}
-                     onClick={() => props.clickPageHandler(p)}>{p}</li>
-        })}
-      </ul>
       {props.users.map(u => {
         let isCurrentUserFetching = props.isButtonDisabled.some(el => el === u.id);
         let cursorStyle = isCurrentUserFetching ? {'cursor': 'default'} : {'cursor': 'pointer'};
@@ -58,7 +60,4 @@ let Users = (props) => {
       })}
     </div>
   )
-
 };
-
-export default Users;

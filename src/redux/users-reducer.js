@@ -87,9 +87,7 @@ export const getUsersThunk = (currentPage, pageSize) => {
       .then(data => {
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(data.items));
-
-        const tooManyPages = data.totalCount > 75 ? 75 : data.totalCount;
-        dispatch(setTotalUsersCount(tooManyPages));
+        dispatch(setTotalUsersCount(data.totalCount));
       });
   }
 };
