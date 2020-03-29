@@ -1,16 +1,20 @@
-
 .form {
-  width: 280px;
-  margin: 30px;
+  width: 100%;
 }
-
-.formItems {
+.area{
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+}
+.formProp{
+  display: flex;
+}
+.main {
   padding: 5px;
 }
-
-.formItems input {
+.main label {
+  flex-basis: 20%;
+}
+.main input {
   margin-left: 10px;
   height: 30px;
   padding: 5px;
@@ -19,21 +23,13 @@
 }
 
 .formItem {
-  flex: 0 1 50%;
-}
-
-label {
-  text-align: left;
+  flex-basis: 14%;
 }
 
 .checkbox {
-  padding: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-}
-.checkbox input {
-  margin-left: 10px;
 }
 
 .form button {

@@ -31,6 +31,7 @@
   height: 50px;
   resize: none;
   border-radius: 5px;
+  border: 2px solid transparent;
 }
 .messages button {
   background-color: #4CAF50; /* Green */

@@ -1,4 +1,4 @@
-import { AuthAPI } from "../api/api";
+import { AuthAPI } from "../services/api";
 
 const TO_AUTH = 'TO_AUTH';
 

@@ -1,66 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-class ProfileStatus extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editMode: false,
-      tempStatus: this.props.status
-    };
-  }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if(prevProps.status !== this.props.status){
-      this.setState({
-        tempStatus: this.props.status
-      })
-    }
-  }
+export default function ProfileStatus({ status, setUserStatusThunk }) {
 
-  changeHandler = (e) => {
-    this.setState({
-      tempStatus: e.currentTarget.value
-    });
+  let [editMode, setMode] = useState(false);
+  let [tempStatus, setTempStatus] = useState(status);
+
+  useEffect(() => {
+    setTempStatus(status)
+  }, [status]);
+
+  const changeHandler = (e) => {
+    setTempStatus(tempStatus = e.currentTarget.value)
   };
 
-  editModeEnable = () => {
-    this.setState({
-      editMode: true
-    });
-  };
-  editModeDisable = () => {
-    this.setState({
-      editMode: false
-    })
-  };
-  sendHandler = () => {
-    this.props.setUserStatusThunk(this.state.tempStatus);
+  const sendHandler = () => {
+    setUserStatusThunk(tempStatus);
   };
 
-  render() {
-    return (
+  return (
+    <div>
+      {!editMode &&
       <div>
-        {!this.state.editMode &&
-        <div>
-          <span onDoubleClick={this.editModeEnable}>status: {this.props.status}</span>
-        </div>
-        }
-        {this.state.editMode &&
-        <div>
-          <input
-            onBlur={() => {
-              this.editModeDisable();
-              this.sendHandler();
-            }}
-            onChange={this.changeHandler}
-            value={this.state.tempStatus}
-            autoFocus={true}
-          />
-        </div>
-        }
+        <span onDoubleClick={() => setMode(true)}>status: {status}</span>
       </div>
-    )
-  }
+      }
+      {editMode &&
+      <div>
+        <input
+          onBlur={() => {
+            setMode(false);
+            sendHandler();
+          }}
+          onChange={changeHandler}
+          value={tempStatus}
+          autoFocus={true}
+        />
+      </div>
+      }
+    </div>
+  )
 }
-
-export default ProfileStatus;

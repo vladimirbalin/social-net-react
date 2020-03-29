@@ -44,15 +44,15 @@ export const AuthAPI = {
         return response.data;
       })
   },
-  login(postForm) {
+  login(postForm){
     return instance.post('/auth/login', postForm)
       .then(response => {
         return response.data;
       })
   },
   logout() {
-    return instance.delete(`auth/login`);
-  }
+  return instance.delete(`auth/login`);
+}
 };
 
 export const ProfileAPI = {

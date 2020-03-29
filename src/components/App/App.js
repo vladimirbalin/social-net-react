@@ -23,11 +23,12 @@ class App extends React.Component {
     return !this.props.initialized ? <Loader/> :
       (
         <Switch>
+          <Route exact path='/' render={() => <ProfileContainer/>}/>
           <Route path='/profile/:userID?' render={() => <ProfileContainer/>}/>
           <Route path='/dialogs' render={() => <DialogsContainer/>}/>
           <Route path='/users' render={() => <UsersContainer/>}/>
           <Route path='/login' render={() => <Login/>}/>
-          <Route path='/news' component={News}/>
+          <Route path='/news' render={() => <News />}/>
           <Route path='/music' component={Music}/>
           <Route path='/settings' component={Settings}/>
           <Route component={notFound}/>

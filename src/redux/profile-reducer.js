@@ -1,4 +1,4 @@
-import { ProfileAPI } from "../api/api";
+import { ProfileAPI } from "../services/api";
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_BY_SYMBOL = 'UPDATE_BY_SYMBOL';
