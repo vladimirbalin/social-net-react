@@ -1,7 +1,6 @@
 import { ProfileAPI } from "../services/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_BY_SYMBOL = 'UPDATE_BY_SYMBOL';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPDATE_BY_SYMBOL_STATUS = 'UPDATE_BY_SYMBOL_STATUS';
@@ -34,11 +33,6 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         postData: [...state.postData, newPost]
       };
-    // case UPDATE_BY_SYMBOL:
-    //   return {
-    //     ...state,
-    //     newPostText: action.text
-    //   };
     case UPDATE_BY_SYMBOL_STATUS:
       return {
         ...state,

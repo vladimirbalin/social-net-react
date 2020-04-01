@@ -12,6 +12,10 @@
   display: inline-block;
   font-size: 14px;
   margin: 10px 0;
+  transition: background-color .3s;
+}
+.myPosts button:hover{
+  background-color: #5dd662;
 }
 .addPostAreaX {
   display: flex;

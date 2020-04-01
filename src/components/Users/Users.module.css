@@ -16,22 +16,21 @@
 }
 
 .users .users__name{
-  justify-content: space-evenly;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.users .users__name span{
+  color: darkgray;
 }
 
 .users .users__right {
-  justify-content: space-between;
-  width: 60%;
-  border: 1px solid #293380;
+  justify-content: center;
 }
 
 .users .users__left {
   align-items: center;
 }
 
-.users .users__location{
-  align-items: flex-end;
-}
 
 .users button {
   text-decoration: none;
@@ -40,11 +39,16 @@
   margin: 10px 20px;
   padding: 10px 30px;
   position: relative;
-  border: 2px solid #f1c40f;
+  border: 2px solid #c68f7d;
   color: #293380;
   font-family: 'Montserrat', sans-serif;
   transition: .4s;
   cursor: pointer;
+}
+
+.users button:hover{
+  background-color: #c68f7d;
+  color: white;
 }
 
 .users button:disabled{
@@ -58,14 +62,26 @@
 .pages .pages__links{
   color: #000000;
   text-decoration: none;
+  transition: 0.3s color;
+  font-family: Fira Sans, sans-serif;
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  border: 1px solid darkgray;
+  border-radius: 3px;
 }
-.pages .lis {
-  font-size: 25px;
-  margin-right: 10px;
+.pages .pages__item {
+  text-align: center;
+  background-color: #f5f1f3;
+  font-size: 15px;
+  min-width: 40px;
   cursor: pointer;
+  transition: .3s background-color;
+  margin-right: 2px;
 }
-
-.pages .pages__selected {
-  color: #ff7008;
-  cursor: default;
+.pages .pages__selected, .pages .pages__item:hover {
+  background-color: #9b413f;
+}
+.pages .pages__selected, .pages .pages__links:hover {
+  color: white;
 }

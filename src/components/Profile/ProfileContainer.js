@@ -7,7 +7,6 @@ import {
   setUserProfileThunk,
   setUserStatusThunk,
 } from "../../redux/profile-reducer";
-import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { LoginHOC } from "../hocLogin/LoginHOC";
 
@@ -37,6 +36,4 @@ const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusTh
 export default compose(
   LoginHOC,
   connect(mapStateToProps, mapDispatchToProps),
-
-  withRouter,
 )(ProfileContainer);

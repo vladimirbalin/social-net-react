@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Settings from "../Settings/Settings";
 import Music from "../Music/Music";
 import News from "../News/News";
@@ -13,6 +13,7 @@ import { compose } from "redux";
 import { initializeThunk } from "../../redux/init-reducer";
 import Loader from "../common/Loader/Loader";
 import notFound from "../notFound/notFound";
+import Content from "../common/Content/Content";
 
 class App extends React.Component {
   componentDidMount() {
@@ -23,12 +24,12 @@ class App extends React.Component {
     return !this.props.initialized ? <Loader/> :
       (
         <Switch>
-          <Route exact path='/' render={() => <ProfileContainer/>}/>
-          <Route path='/profile/:userID?' render={() => <ProfileContainer/>}/>
-          <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-          <Route path='/users' render={() => <UsersContainer/>}/>
-          <Route path='/login' render={() => <Login/>}/>
-          <Route path='/news' render={() => <News />}/>
+          <Route exact path='/' component={Content} />
+          <Route path='/profile/:userID?' component={ProfileContainer} />}/>
+          <Route path='/dialogs' component={DialogsContainer}/>
+          <Route path='/users' component={UsersContainer}/>
+          <Route path='/login' component={Login}/>
+          <Route path='/news' component={News}/>
           <Route path='/music' component={Music}/>
           <Route path='/settings' component={Settings}/>
           <Route component={notFound}/>
@@ -42,6 +43,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-  withRouter,
   connect(mapStateToProps, {initializeThunk})
 )(App);

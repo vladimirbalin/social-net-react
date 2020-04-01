@@ -12,10 +12,10 @@ export default function Users(props) {
       <Pagination activePage={props.currentPage}
                   itemsCountPerPage={props.pageSize}
                   totalItemsCount={props.totalUsersCount}
-                  pageRangeDisplayed={10}
+                  pageRangeDisplayed={5}
                   onChange={props.clickPageHandler}
                   innerClass={s.pages}
-                  itemClass={s.lis}
+                  itemClass={s.pages__item}
                   activeLinkClass={s.pages__selected}
                   linkClass={s.pages__links}
                   hideDisabled={true}
@@ -48,11 +48,9 @@ export default function Users(props) {
             </div>
             <div className={s.users__right}>
               <div className={s.users__name}>
-                <div>{u.name}</div>
-                <div>{u.status === null ? 'no status' : u.status}</div>
-              </div>
-              <div className={s.users__location}>
-                <div>id: {u.id}</div>
+                <div><span>nickname: </span>{u.name}</div>
+                <div><span>status: </span>{u.status === null ? 'no status' : u.status}</div>
+                <div><span>id: </span>{u.id}</div>
               </div>
             </div>
           </div>
