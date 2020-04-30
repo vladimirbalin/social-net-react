@@ -1,5 +1,4 @@
 import s from "./Users.module.css";
-import userSvg from '../../assets/img/user.svg';
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Pagination from "react-js-pagination";
@@ -39,7 +38,8 @@ export default function Users(props) {
             <div className={s.users__left}>
               <div>
                 <NavLink to={'/profile/' + u.id}>
-                  <img src={u.photos.small === null ? userSvg : u.photos.small} alt='userphoto'/>
+                  {/*<img src={u.photos.small === null ? userSvg : u.photos.small} alt='u.id + 'photo''/>*/}
+                  <img src={u.photos.small === null ? `http://robohash.org/${u.id}?set=set4` : u.photos.small} alt={u.id + 'photo'}/>
                 </NavLink>
               </div>
               <div>

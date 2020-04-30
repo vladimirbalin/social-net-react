@@ -8,7 +8,8 @@ const LoginForm = (props) => {
   const {handleSubmit} = props;
   // const passValue = 'gR3bfcF44jNKAct';
   // const loginValue = 'vladimirzq@Gmail.com';
-  return <form onSubmit={handleSubmit} className={s.form}>
+  return (
+  <form onSubmit={handleSubmit} className={s.form}>
     <div className={s.main}>
       <Field name='email' label={'Login'}
              placeholder={'login'}
@@ -22,7 +23,7 @@ const LoginForm = (props) => {
              placeholder={'pass'}
              component={Input}
              validate={[requiredFields]}
-             type='text'
+             type='password'
              formProp={s.formProp}/>
     </div>
     <div className={s.checkbox}>
@@ -31,7 +32,7 @@ const LoginForm = (props) => {
     </div>
 
     <button type='submit'>Sign in</button>
-  </form>
+  </form>)
 };
 
 export default reduxForm({form: 'login'})(LoginForm);

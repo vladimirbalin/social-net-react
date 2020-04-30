@@ -10,9 +10,6 @@ const Dialogs = ({sendMessage, state}) => {
   const clickHandler = (formData) => {
     sendMessage(formData.dialogsTextarea);
   };
-  // const changeHandler = (event) => {
-  //   updateBySymbolDialogs(event.target.value);
-  // };
 
   return (
 

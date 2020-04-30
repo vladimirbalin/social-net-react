@@ -17,6 +17,11 @@
   color: #fff;
   font-size: 15px;
   text-align: center;
-  margin-bottom: 5px;
+  padding: 3px 0;
   text-decoration: none;
+  width: 100%;
+  transition: .3s background-color;
+}
+.item:hover{
+  background-color: #d79b88;
 }

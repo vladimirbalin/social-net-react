@@ -11,9 +11,9 @@ import Login from "../Login/Login";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeThunk } from "../../redux/init-reducer";
-import Loader from "../common/Loader/Loader";
 import notFound from "../notFound/notFound";
 import Content from "../common/Content/Content";
+import Loader from '../common/Loader/Loader';
 
 class App extends React.Component {
   componentDidMount() {
