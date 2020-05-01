@@ -1,4 +1,4 @@
-import s from "./Login.module.css";
+import "./Login.styles.scss";
 import React from "react";
 import LoginForm from "./LoginForm";
 import { Redirect } from "react-router-dom";
@@ -7,7 +7,7 @@ import { loginThunk } from "../../redux/auth-reducer";
 import HeaderContainer from "../Header/HeaderContainer";
 
 const Login = (props) => {
-  const onSubmit = (formData) => {
+  const handleSubmit = (formData) => {
     props.loginThunk(formData)
   };
 
@@ -16,10 +16,10 @@ const Login = (props) => {
         <HeaderContainer/>
         <div className='middle'>
           <div className='app-wrapper-content'>
-            <div className={s.loginPage}>
+            <section className='loginpage'>
               <h1>Залогиньтесь пожалуйста</h1>
-              <LoginForm onSubmit={onSubmit}/>
-            </div>
+              <LoginForm onSubmit={handleSubmit}/>
+            </section>
           </div>
         </div>
       </div>

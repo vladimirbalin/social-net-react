@@ -39,3 +39,19 @@ code {
 
 }
 
+button{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: background-color .3s;
+  &:hover{
+    background-color: #5dd662;
+    cursor: pointer;
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.styles.scss';
 import { Route, Switch } from "react-router-dom";
 import Settings from "../Settings/Settings";
 import Music from "../Music/Music";
@@ -11,7 +11,7 @@ import Login from "../Login/Login";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeThunk } from "../../redux/init-reducer";
-import notFound from "../notFound/notFound";
+import NotFound from "../NotFound/NotFound";
 import Content from "../common/Content/Content";
 import Loader from '../common/Loader/Loader';
 
@@ -32,7 +32,7 @@ class App extends React.Component {
           <Route path='/news' component={News}/>
           <Route path='/music' component={Music}/>
           <Route path='/settings' component={Settings}/>
-          <Route component={notFound}/>
+          <Route component={NotFound}/>
         </Switch>
       );
   }

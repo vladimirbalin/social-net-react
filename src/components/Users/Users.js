@@ -1,22 +1,21 @@
-import s from "./Users.module.css";
+import "./Users.styles.scss";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
-
 export default function Users(props) {
 
   return (
-    <div className={s.users}>
+    <section className='users'>
       <Pagination activePage={props.currentPage}
                   itemsCountPerPage={props.pageSize}
                   totalItemsCount={props.totalUsersCount}
                   pageRangeDisplayed={5}
                   onChange={props.clickPageHandler}
-                  innerClass={s.pages}
-                  itemClass={s.pages__item}
-                  activeLinkClass={s.pages__selected}
-                  linkClass={s.pages__links}
+                  innerClass='users__pages'
+                  itemClass='users__pbutton'
+                  activeLinkClass='users__selected'
+                  linkClass='users__links'
                   hideDisabled={true}
                   hideNavigation={true}
       />
@@ -34,8 +33,8 @@ export default function Users(props) {
                                  style={cursorStyle}>Follow</button>;
 
         return (
-          <div className={s.users__item} key={u.id}>
-            <div className={s.users__left}>
+          <div className='users__item' key={u.id}>
+            <div className='users__left'>
               <div>
                 <NavLink to={'/profile/' + u.id}>
                   {/*<img src={u.photos.small === null ? userSvg : u.photos.small} alt='u.id + 'photo''/>*/}
@@ -46,8 +45,8 @@ export default function Users(props) {
                 {followButton}
               </div>
             </div>
-            <div className={s.users__right}>
-              <div className={s.users__name}>
+            <div className='users__right'>
+              <div className='users__name'>
                 <div><span>nickname: </span>{u.name}</div>
                 <div><span>status: </span>{u.status === null ? 'no status' : u.status}</div>
                 <div><span>id: </span>{u.id}</div>
@@ -56,6 +55,6 @@ export default function Users(props) {
           </div>
         )
       })}
-    </div>
+    </section>
   )
 };

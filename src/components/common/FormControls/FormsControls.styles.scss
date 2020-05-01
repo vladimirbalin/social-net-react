@@ -1,0 +1,34 @@
+.form-wrap{
+  textarea{
+    resize: none;
+    border: 2px solid transparent;
+    transition: .5s border-color;
+  }
+  &__active{
+    animation: .5s ticking;
+  }
+  &.error{  
+    textarea{
+      border-color: red;
+    }
+    input{
+      border: 2px solid red;
+    }  
+    span{
+      color: red;
+    }
+  }
+}
+
+
+@keyframes ticking {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}

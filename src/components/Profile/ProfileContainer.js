@@ -14,8 +14,6 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.setUserProfileThunk(this.props.match.params.userID);
     this.props.getUserStatusThunk(this.props.match.params.userID);
-
-    console.log('location: ', this.props.location, ' history: ', this.props.history, ' match: ', this.props.match);
   };
 
   render() {

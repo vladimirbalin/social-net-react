@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from "./Post/Post";
-import s from './MyPosts.module.css';
+import './MyPosts.styles.scss';
 import MyPostsForm from "./MyPostsForm";
 
 
@@ -11,17 +11,15 @@ const MyPosts = ({addPost, postData}) => {
     formData.addPostTextarea = '';
   };
 
-
   return (
-    <div className={s.myPosts}>
+    <section className='my-posts'>
 
-      <div>
         <MyPostsForm onSubmit={clickHandler}/>
         {postData.map(el => <Post message={el.message}
                                   likes={el.likesCount}
                                   key={el.id}/>)}
-      </div>
-    </div>
+      
+    </section>
   );
 };
 

@@ -1,34 +1,31 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import s from './LoginForm.module.css';
+import './LoginForm.styles.scss';
 import { Input } from "../common/FormControls/FormsControls";
 import { requiredFields } from "../../services/validators";
 
 const LoginForm = (props) => {
-  const {handleSubmit} = props;
+  const { handleSubmit } = props;
   // const passValue = 'gR3bfcF44jNKAct';
   // const loginValue = 'vladimirzq@Gmail.com';
   return (
-  <form onSubmit={handleSubmit} className={s.form}>
-    <div className={s.main}>
-      <Field name='email' label={'Login'}
-             placeholder={'login'}
+  <form onSubmit={handleSubmit} className='loginpage__form'>
+    <div className='loginpage__item'>
+      <Field name='email' label='Login'
+             placeholder='login'
              component={Input}
              validate={[requiredFields]}
-             type='text'
-             formProp={s.formProp}/>
+             type='text'/>
     </div>
-    <div className={s.main}>
-      <Field name='password' label={'Password'}
-             placeholder={'pass'}
+    <div className='loginpage__item'>
+      <Field name='password' label='Password'
+             placeholder='pass'
              component={Input}
              validate={[requiredFields]}
-             type='password'
-             formProp={s.formProp}/>
+             type='password'/>
     </div>
-    <div className={s.checkbox}>
-      <label htmlFor='rememberMe'>Запомнить меня</label>
-      <Field name='rememberMe' id='rememberMe' component='input' type='checkbox'/>
+    <div className='loginpage__checkbox'>
+      <Field label='Запомнить меня' name='rememberMe' id='rememberMe' component={Input} type='checkbox'/>
     </div>
 
     <button type='submit'>Sign in</button>

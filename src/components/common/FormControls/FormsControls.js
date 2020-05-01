@@ -1,31 +1,33 @@
 import React from "react";
-import s from './FormsControls.module.css'
+import './FormsControls.styles.scss';
 
-const FormControl = ({label, meta, formProp, children}) => {
-  const {submitFailed, error, warning, touched } = meta;
+let id = 0;
+
+const FormControl = ({ label, meta, children }) => {
+  const { submitFailed, error, warning, touched } = meta;
   const hasError = (touched && error && submitFailed);
-
-  return <div className={hasError ? formProp + ' ' + s.error : formProp}>
-    <label>{label}</label>
-    <div className={s.width}>
+  
+  return (
+    <div className={hasError ? 'form-wrap error' : 'form-wrap'}>
       {children}
+      <label htmlFor={children.props.id}>{label}</label>
       {hasError &&
-      ((error && <span className={s.active}>{error}</span>) ||
-        (warning && <span className={s.active}>{warning}</span>))}
+      ((error && <span className='form-wrap__active'>{error}</span>) ||
+        (warning && <span className='form-wrap__active'>{warning}</span>))}    
     </div>
-  </div>
+  )
 }
 
 export const Textarea = (props) => {
-  const {label, input, meta, formProp, children, ...otherProps } = props;
+  const { label, input, meta, children, ...otherProps } = props;
   return <FormControl {...props} >
-      <textarea {...input} {...otherProps} />
+      <textarea id={`form-wrap__textarea${++id}`} {...input} {...otherProps} />
     </FormControl>
 };
 
 export const Input = (props) => {
-  const {label, input, meta, formProp, children, ...otherProps } = props;
+  const { label, input, meta, children, ...otherProps } = props;
   return <FormControl {...props}>
-    <input {...input} {...otherProps} />
+    <input id={`form-wrap__input${++id}`} {...input} {...otherProps} />
     </FormControl>
 };

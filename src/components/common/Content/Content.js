@@ -14,7 +14,6 @@ const Content = (props) => {
         </div>
       </div>
     </div>
-
   );
 };
 

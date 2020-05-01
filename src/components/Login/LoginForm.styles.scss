@@ -1,0 +1,92 @@
+.loginpage {
+  &__item {
+    padding: 5px;
+
+    .form-wrap {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+
+  input {
+    margin-left: 10px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ffd78b;
+  }
+
+  &__form {
+    button {     
+      display: block;
+      width: 90px;
+      height: 40px;
+      margin: 15px auto;
+      color: white;
+      font-size: 16px;
+      padding: 0;
+ 
+    }
+  }
+
+  &__checkbox {
+    .form-wrap {
+      label {
+        position: relative;
+        flex-basis: 40%;
+        display: inline-block;
+        padding-right: 28px;
+        line-height: 20px;
+        cursor: pointer;
+
+        &:before {
+          content: "";
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          width: 18px;
+          height: 18px;
+          border: 1px solid #dddddd;
+          background-color: #ffffff;
+          border-radius: 2px;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          -webkit-transition: all 0.2s ease;
+          -moz-transition: all 0.2s ease;
+          -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+          right: 3px;
+          top: 4px;
+          width: 10px;
+          height: 5px;
+          border-radius: 1px;
+          border-left: 4px solid #e145a3;
+          border-bottom: 4px solid #e145a3;
+          -webkit-transform: rotate(-45deg);
+          -moz-transform: rotate(-45deg);
+          -o-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+        }
+      }
+
+      input[type="checkbox"]:checked,
+      input[type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+      }
+    }
+
+    input[type="checkbox"]:not(:checked) + label:after {
+      opacity: 0;
+    }
+
+    input[type="checkbox"]:checked + label:after {
+      opacity: 1;
+    }
+
+  }
+}

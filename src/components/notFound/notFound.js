@@ -1,16 +1,16 @@
 import React from "react";
-import s from './notFound.module.css'
+import './NotFound.styles.scss';
 
 const NotFound = ({location, history}) => {
   return (
-    <div className={s.notFound}>
-      <div className={s.block}>
+    <section className='not-found'>
+      <div className='not-found__block'>
         whoops, nothing found here <br/>
         Resource not found at '{location.pathname}'
         <hr/>
-        <div className={s.goBack} onClick={history.goBack}>click to go to previous page</div>
+        <div className='not-found__goback' onClick={history.goBack}>click to go to previous page</div>
       </div>
-    </div>
+    </section>
   )
 };
 
