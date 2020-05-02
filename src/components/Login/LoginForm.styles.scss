@@ -4,7 +4,19 @@
 
     .form-wrap {
       display: flex;
-      flex-direction: row-reverse;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding-left: 134px;
+      label{
+        order: 1;
+        flex-basis: 17%;
+      }
+      input{
+        order: 2;
+      }
+      span{
+        order: 3;
+      }
     }
   }
 

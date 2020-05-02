@@ -7,12 +7,12 @@ const Content = (props) => {
   return (
     <div className='app-wrapper'>
       <HeaderContainer/>
-      <div className='middle'>
+      <section className='middle'>
         <NavBar/>
         <div className='app-wrapper-content'>
           {props.children}
         </div>
-      </div>
+      </section>
     </div>
   );
 };

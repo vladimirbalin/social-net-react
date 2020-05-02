@@ -1,4 +1,5 @@
 import { AuthAPI } from "../services/api";
+import { stopSubmit } from "redux-form";
 
 const TO_AUTH = 'TO_AUTH';
 
@@ -40,10 +41,12 @@ export const getAuthUserData = () => {
 export const loginThunk = (formData) => (dispatch) => {
   AuthAPI.login(formData)
     .then(data => {
-      console.log(data);
       if(data.resultCode === 0) {
-        console.log(data)
         dispatch(getAuthUserData());
+      } else {
+        let messageError = data.messages.length ? data.messages[0] : 'some error'  
+        let action = stopSubmit('login', {_error: messageError});
+        dispatch(action);
       }
     })
 };
