@@ -39,12 +39,12 @@ export const getAuthUserData = () => {
   }
 };
 export const loginThunk = (formData) => (dispatch) => {
-  AuthAPI.login(formData)
+  return AuthAPI.login(formData)
     .then(data => {
       if(data.resultCode === 0) {
         dispatch(getAuthUserData());
       } else {
-        let messageError = data.messages.length ? data.messages[0] : 'some error'  
+        let messageError = data.messages.length ? data.messages[0] : 'something went wrong'  
         let action = stopSubmit('login', {_error: messageError});
         dispatch(action);
       }

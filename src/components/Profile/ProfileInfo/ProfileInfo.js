@@ -1,5 +1,5 @@
 import React from "react";
-import s from './ProfileInfo.module.css';
+import './ProfileInfo.styles.scss';
 import Loader from "../../common/Loader/Loader";
 import thumbUpSvg from '../../../assets/img/like.svg';
 import thumbDownSvg from '../../../assets/img/dislike.svg';
@@ -12,22 +12,22 @@ const ProfileInfo = (props) => {
   }
 
   const profileAvatar = props.profile.photos.small ?
-    <img className={s.avatar} src={props.profile.photos.small} alt=''/> :
-    <img className={s.avatar} src={userDefaultAvatar} alt=''/>;
+    <img className='profile__avatar' src={props.profile.photos.small} alt=''/> :
+    <img className='profile__avatar' src={userDefaultAvatar} alt=''/>;
 
   const lfJobIcon = props.profile.lookingForAJob ?
-    <img src={thumbUpSvg} alt='thumbup'/> :
-    <img src={thumbDownSvg} alt='thumbdown'/>;
+    <img className='profile__icon' src={thumbUpSvg} alt='thumbup'/> :
+    <img className='profile__icon' src={thumbDownSvg} alt='thumbdown'/>;
 
   return (
-    <div className={s.descriptionBlock}>
+    <div className='profile__info'>
       { profileAvatar }
       <ProfileStatus status={props.status}
                      setUserStatusThunk={props.setUserStatusThunk}
       />
-      <span className={s.subtitles}>info: </span> {props.profile.aboutMe || 'no info'} <br/>
-      <span className={s.subtitles}>looking for a job?: </span> { lfJobIcon } <br/>
-      <span className={s.subtitles}>full name: </span> {props.profile.fullName} <br/>
+      <span className='profile__subtitles'>info: </span> {props.profile.aboutMe || 'no info'} <br/>
+      <span className='profile__subtitles'>looking for a job?: </span> { lfJobIcon } <br/>
+      <span className='profile__subtitles'>full name: </span> {props.profile.fullName} <br/>
     </div>
   )
 };

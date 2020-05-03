@@ -15,7 +15,7 @@ let initialState = {
     {id: 2, message: 'That\'s my first message', likesCount: 15},
     {id: 3, message: 'Hi, how are you??', likesCount: 39},
   ],
-  profile: null,
+  profileInfo: null,
   status: ''
 };
 
@@ -41,7 +41,7 @@ const profileReducer = (state = initialState, action) => {
     case SET_USER_PROFILE:
       return {
         ...state,
-        profile: action.profile
+        profileInfo: action.profileInfo
       };
     case SET_USER_STATUS:
       return {
@@ -55,13 +55,12 @@ const profileReducer = (state = initialState, action) => {
 
 
 export const addPost = (text) => ({type: ADD_POST, text});
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const setUserProfile = (profileInfo) => ({type: SET_USER_PROFILE, profileInfo});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-// export const updateBySymbol = (text) => ({type: UPDATE_BY_SYMBOL, text});
 
 export const setUserProfileThunk = (userId) => {
   return (dispatch) => {
-    ProfileAPI.setProfile(userId || 6234)
+    ProfileAPI.setProfile(userId)
       .then(data => {
         dispatch(setUserProfile(data))
       });
@@ -69,7 +68,7 @@ export const setUserProfileThunk = (userId) => {
 };
 export const getUserStatusThunk = (userId) => {
   return (dispatch) => {
-    ProfileAPI.getStatus(userId || 6234)
+    ProfileAPI.getStatus(userId)
       .then(data => {
         dispatch(setUserStatus(data))
       });

@@ -3,7 +3,6 @@ import { followThunk, getUsersThunk, setCurrentPageThunk, unfollowThunk } from "
 import React from "react";
 import Users from "./Users";
 import Loader from "../common/Loader/Loader";
-import { LoginHOC } from "../hocLogin/LoginHOC";
 import { compose } from "redux";
 
 class UsersContainer extends React.Component{
@@ -53,6 +52,5 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-  LoginHOC,
   connect(mapStateToProps, mapDispatchToProps),
 )(UsersContainer);

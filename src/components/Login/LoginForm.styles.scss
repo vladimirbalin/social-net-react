@@ -37,8 +37,14 @@
       color: white;
       font-size: 16px;
       padding: 0;
- 
+      &.disabled{
+        opacity: .2;
+      }
     }
+  }
+  &__summary-error{
+    padding-top: 10px;
+    color: red;
   }
 
   &__checkbox {

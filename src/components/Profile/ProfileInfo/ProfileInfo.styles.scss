@@ -1,0 +1,16 @@
+.profile {
+  &__avatar {
+    border: none;
+    display: block;
+    margin-bottom: 10px;
+  }
+  &__subtitles {
+    color: #4b4b4b;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  &__icon{
+    width: 20px;
+    height: 20px;
+  }
+}

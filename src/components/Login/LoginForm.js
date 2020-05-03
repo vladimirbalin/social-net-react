@@ -4,12 +4,15 @@ import './LoginForm.styles.scss';
 import { Input } from "../common/FormControls/FormsControls";
 import { requiredFields } from "../../services/validators";
 
-const LoginForm = ({ handleSubmit, error }) => {
-  
+const LoginForm = ({ handleSubmit, error, submitting, ...otherProps }) => {
   // const passValue = 'gR3bfcF44jNKAct';
   // const loginValue = 'vladimirzq@Gmail.com';
+
   return (
   <form onSubmit={handleSubmit} className='loginpage__form'>
+    <pre>
+      {JSON.stringify([submitting, otherProps, error], 0, 2)}
+    </pre>
     <div className='loginpage__item'>
       <Field name='email' label='Login'
              placeholder='login'
@@ -27,9 +30,14 @@ const LoginForm = ({ handleSubmit, error }) => {
     <div className='loginpage__checkbox'>
       <Field label='Запомнить меня' name='rememberMe' component={Input} type='checkbox'/>
     </div>
-    {error && <div className='loginpage__summary-error'>{error}</div>}
-    <button type='submit'>Sign in</button>
-  </form>)
+    {error && <p className='loginpage__summary-error'>{error}</p>}
+    <button className={submitting ? 'disabled' : ''} type='submit' disabled={submitting}>Sign in</button>
+    <span>
+    
+  </span>
+  </form>
+  
+  )
 };
 
 export default reduxForm({form: 'login'})(LoginForm);

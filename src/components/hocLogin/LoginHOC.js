@@ -1,7 +1,6 @@
 import { Redirect } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import Content from "../common/Content/Content";
 
 export const LoginHOC = (WrappedComponent) => {
 
@@ -11,7 +10,7 @@ export const LoginHOC = (WrappedComponent) => {
     return (
       !props.isAuth ?
         <Redirect to={'/login'}/> :
-        <Content><WrappedComponent {...props} /></Content>
+       <WrappedComponent {...props} />
     );
   };
 

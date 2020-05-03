@@ -1,10 +1,10 @@
 import React from 'react';
 import loaderSvg from '../../../assets/img/loader.svg';
-import s from './Preloader.module.css'
+import './Loader.styles.scss';
 
 const Loader = (props) => {
   return (
-    <div className={s.preloader}>
+    <div className='preloader'>
       <img src={loaderSvg} alt='loader' />
     </div>
   )
