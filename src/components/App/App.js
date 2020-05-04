@@ -14,7 +14,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeThunk } from "../../redux/init-reducer";
 import NotFound from "../NotFound/NotFound";
-import Content from "../common/Content/Content";
 import Loader from "../common/Loader/Loader";
 
 class App extends React.Component {
@@ -32,7 +31,7 @@ class App extends React.Component {
           <NavBar />
           <div className="app-wrapper-content">
             <Switch>
-              <Route exact path="/" component={Content} />
+              <Route exact path="/" component={ProfileContainer} />
               <Route path="/profile/:userID?" component={ProfileContainer} />
               <Route path="/dialogs" component={DialogsContainer} />
               <Route path="/users" component={UsersContainer} />

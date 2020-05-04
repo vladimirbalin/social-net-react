@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { requiredFields } from "../../services/validators";
-import { Textarea } from "../common/FormControls/FormsControls";
+import { RenderTextarea } from "../common/FormControls/FormControls";
 
 
 
@@ -9,7 +9,7 @@ const DialogsForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className='dialogs__form'>
       <Field type='text'
-            component={Textarea}
+            component={RenderTextarea}
             name='dialogsTextarea'
             validate={[requiredFields]}
             placeholder='add your message here...'

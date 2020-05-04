@@ -1,8 +1,8 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import './LoginForm.styles.scss';
-import { Input } from "../common/FormControls/FormsControls";
 import { requiredFields } from "../../services/validators";
+import { RenderInput } from "../common/FormControls/FormControls";
 
 const LoginForm = ({ handleSubmit, error, submitting, ...otherProps }) => {
   // const passValue = 'gR3bfcF44jNKAct';
@@ -16,19 +16,19 @@ const LoginForm = ({ handleSubmit, error, submitting, ...otherProps }) => {
     <div className='loginpage__item'>
       <Field name='email' label='Login'
              placeholder='login'
-             component={Input}
+             component={RenderInput}
              validate={[requiredFields]}
              type='text'/>
     </div>
     <div className='loginpage__item'>
       <Field name='password' label='Password'
              placeholder='pass'
-             component={Input}
+             component={RenderInput}
              validate={[requiredFields]}
              type='password'/>
     </div>
     <div className='loginpage__checkbox'>
-      <Field label='Запомнить меня' name='rememberMe' component={Input} type='checkbox'/>
+      <Field label='Запомнить меня' name='rememberMe' component={RenderInput} type='checkbox'/>
     </div>
     {error && <p className='loginpage__summary-error'>{error}</p>}
     <button className={submitting ? 'disabled' : ''} type='submit' disabled={submitting}>Sign in</button>
