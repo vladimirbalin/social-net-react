@@ -11,11 +11,9 @@ const instance = axios.create(
 );
 
 export const UsersAPI = {
-  setUsers(currentPage, pageSize){
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-      .then(response => {
-        return response.data;
-      })
+  async setUsers(currentPage, pageSize){
+    const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
+    return response.data;
   },
   pageClicked(pageClicked, pageSize){
     return instance.get(`users?page=${pageClicked}&count=${pageSize}`)
@@ -38,20 +36,17 @@ export const UsersAPI = {
 };
 
 export const AuthAPI = {
-  auth(){
-    return instance.get('auth/me')
-      .then(response => {
-        return response.data;
-      })
+  async auth(){
+    const response = await instance.get('auth/me');
+    return response.data;
   },
-  login(postForm){
-    return instance.post('auth/login', postForm)
-      .then(response => {
-        return response.data;
-      })
+  async login(postForm){
+    const response = await instance.post('auth/login', postForm)
+    return response.data;
   },
-  logout() {
-    return instance.delete('auth/login');
+  async logout() {
+    const response = await instance.delete('auth/login');
+    return response.data;
 }
 };
 

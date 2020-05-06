@@ -1,11 +1,10 @@
 import React from 'react';
-import Post from "./Post/Post";
 import './MyPosts.styles.scss';
+import Post from "./Post/Post";
 import MyPostsForm from "./MyPostsForm";
 
 
-const MyPosts = ({addPost, postData}) => {
-
+const MyPosts = ({ addPost, postData }) => {
   const clickHandler = (formData) => {
     addPost(formData.addPostTextArea);
     formData.addPostTextarea = '';

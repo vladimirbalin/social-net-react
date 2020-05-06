@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
-import { followThunk, getUsersThunk, setCurrentPageThunk, unfollowThunk } from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Loader from "../common/Loader/Loader";
+import { connect } from "react-redux";
+import { followThunk, getUsersThunk, setCurrentPageThunk, unfollowThunk } from "../../redux/users-reducer";
 import { compose } from "redux";
 
 class UsersContainer extends React.Component{

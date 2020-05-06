@@ -1,10 +1,9 @@
 import React from "react";
 import './FormsControls.styles.scss';
 import { MdErrorOutline } from 'react-icons/md';
+import { Field } from "redux-form";
 
-const CreateFormControl = render => ({ input, label, meta, value, ...rest }) => {
-  
-    const { submitFailed, error, warning, touched } = meta;
+const CreateFormControl = render => ({ input, label, meta: { submitFailed, error, warning, touched }, value, ...rest }) => {
     const hasError = (touched && error && submitFailed);
     let id = new Date().getTime();
     return (
@@ -25,3 +24,12 @@ export const RenderInput = CreateFormControl((input, id, rest) =>
 export const RenderTextarea = CreateFormControl((input, id, rest) => 
   <textarea id={id} {...input} {...rest} />
 )
+
+export const createField = (name, label, placeholder, 
+                            validators, component, type) => 
+  <Field name={name} label={label}
+    placeholder={placeholder}
+    component={component}
+    validate={validators}
+    type={type} 
+  />

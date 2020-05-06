@@ -1,16 +1,16 @@
 import React from 'react';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import './Profile.styles.scss';
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
+const Profile = ({ profile, status, setUserStatusThunk, isAuth }) => {
   return (
     <section className='profile'>
-        <ProfileInfo profile={props.profile}
-                     status={props.status}
-                     setUserStatusThunk={props.setUserStatusThunk}
+        <ProfileInfo profile={profile}
+                     status={status}
+                     setUserStatusThunk={setUserStatusThunk}
         />    
-      {props.isAuth ? 
+      {isAuth ? 
       <MyPostsContainer/> :
       null}
     </section>

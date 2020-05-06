@@ -25,13 +25,12 @@ class ProfileContainer extends React.Component {
 
   render() {
     return !(this.props.match.params.userID || this.props.userId) ? 
-      <Redirect to='/login'/> :
-      
-        <Profile profile={this.props.profile}
-               status={this.props.status}
-               setUserStatusThunk={this.props.setUserStatusThunk}
-               isAuth={this.props.isAuth}
-        />
+      <Redirect to='/login'/> :      
+      <Profile profile={this.props.profile}
+              status={this.props.status}
+              setUserStatusThunk={this.props.setUserStatusThunk}
+              isAuth={this.props.isAuth}
+      />
   };
 }
 

@@ -5,9 +5,9 @@ import { RenderTextarea } from "../common/FormControls/FormControls";
 
 
 
-const DialogsForm = (props) => {
+const DialogsForm = ({ handleSubmit }) => {
   return (
-    <form onSubmit={props.handleSubmit} className='dialogs__form'>
+    <form onSubmit={handleSubmit} className='dialogs__form'>
       <Field type='text'
             component={RenderTextarea}
             name='dialogsTextarea'

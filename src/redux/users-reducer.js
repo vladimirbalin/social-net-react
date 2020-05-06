@@ -1,12 +1,13 @@
 import { UsersAPI } from "../services/api";
+import { updateObjectInArray } from '../services/objects';
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET-USERS';
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const BUTTON_IS_DISABLED = 'BUTTON_IS_DISABLED';
+const FOLLOW = 'users/FOLLOW';
+const UNFOLLOW = 'users/UNFOLLOW';
+const SET_USERS = 'users/SET-USERS';
+const SET_CURRENT_PAGE = 'users/SET-CURRENT-PAGE';
+const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
+const BUTTON_IS_DISABLED = 'users/BUTTON_IS_DISABLED';
 
 let initialState = {
   users: [],
@@ -23,16 +24,12 @@ const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map(u => {
-          return u.id === action.userID ? {...u, followed: true} : u;
-        })
+        users: updateObjectInArray(state.users, 'id', action.userID, {followed: true})
       };
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map(u => {
-          return u.id === action.userID ? {...u, followed: false} : u;
-        })
+       users: updateObjectInArray(state.users, 'id', action.userID, {followed: false})
       };
     case SET_USERS:
       return {
@@ -80,52 +77,38 @@ export const toggleButtonDisable = (isFetching, buttonsDisabled) => ({
   buttonsDisabled
 });
 
-export const getUsersThunk = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    UsersAPI.setUsers(currentPage, pageSize)
-      .then(data => {
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUsersCount(data.totalCount));
-      });
-  }
-};
-export const setCurrentPageThunk = (pageClicked, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    UsersAPI.pageClicked(pageClicked, pageSize)
-      .then(data => {
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(data.items))
-      });
+export const getUsersThunk = (currentPage, pageSize) => async (dispatch) => {
+  dispatch(toggleIsFetching(true));
+  const response = await UsersAPI.setUsers(currentPage, pageSize);
 
-    dispatch(setCurrentPage(pageClicked));
+  dispatch(toggleIsFetching(false));
+  dispatch(setUsers(response.items));
+  dispatch(setTotalUsersCount(response.totalCount));
+};
+export const setCurrentPageThunk = (pageClicked, pageSize) => async (dispatch) => {
+  dispatch(toggleIsFetching(true));
+  const response = await UsersAPI.pageClicked(pageClicked, pageSize);
+
+  dispatch(toggleIsFetching(false));
+  dispatch(setUsers(response.items))
+  dispatch(setCurrentPage(pageClicked));
+};
+
+export const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+  dispatch(toggleButtonDisable(true, userId));
+  const response = await apiMethod(userId);
+
+  if (response.resultCode === 0) {
+    dispatch(actionCreator(userId));
+    dispatch(toggleButtonDisable(false, userId));
   }
 };
-export const followThunk = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleButtonDisable(true, userId));
-    UsersAPI.follow(userId)
-      .then(data => {
-        if (data.resultCode === 0) {
-          dispatch(follow(userId));
-          dispatch(toggleButtonDisable(false, userId));
-        }
-      })
-  }
+
+export const followThunk = (userId) => async (dispatch) => {
+  followUnfollowFlow(dispatch, userId, UsersAPI.follow, follow);
 };
-export const unfollowThunk = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleButtonDisable(true, userId));
-    UsersAPI.unFollow(userId)
-      .then(data => {
-        if (data.resultCode === 0) {
-          dispatch(unFollow(userId));
-          dispatch(toggleButtonDisable(false, userId));
-        }
-      })
-  }
+export const unfollowThunk = (userId) => async (dispatch) => {
+  followUnfollowFlow(dispatch, userId, UsersAPI.unFollow, unFollow);
 };
 
 export default usersReducer;

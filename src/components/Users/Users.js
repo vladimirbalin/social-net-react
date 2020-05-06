@@ -1,17 +1,16 @@
-import "./Users.styles.scss";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import "./Users.styles.scss";
+import User from './User';
 import Pagination from "react-js-pagination";
 
-export default function Users(props) {
-
-  return (
+const Users = ({ currentPage, pageSize, totalUsersCount, clickPageHandler, 
+                                users, isButtonDisabled, unFollow, follow }) =>
     <section className='users'>
-      <Pagination activePage={props.currentPage}
-                  itemsCountPerPage={props.pageSize}
-                  totalItemsCount={props.totalUsersCount}
+      <Pagination activePage={currentPage}
+                  itemsCountPerPage={pageSize}
+                  totalItemsCount={totalUsersCount}
                   pageRangeDisplayed={5}
-                  onChange={props.clickPageHandler}
+                  onChange={clickPageHandler}
                   innerClass='users__pages'
                   itemClass='users__pbutton'
                   activeLinkClass='users__selected'
@@ -20,41 +19,23 @@ export default function Users(props) {
                   hideNavigation={true}
       />
 
-      {props.users.map(u => {
-        let isCurrentUserFetching = props.isButtonDisabled.some(el => el === u.id);
+      {users.map(u => {
+        let isCurrentUserFetching = isButtonDisabled.some(el => el === u.id);
         let cursorStyle = isCurrentUserFetching ? {'cursor': 'default'} : {'cursor': 'pointer'};
         let followButton;
         u.followed ?
-          followButton = <button onClick={() => props.unFollow(u.id)}
+          followButton = <button onClick={() => unFollow(u.id)}
                                  disabled={isCurrentUserFetching}
                                  style={cursorStyle}>Unfollow</button> :
-          followButton = <button onClick={() => props.follow(u.id)}
+          followButton = <button onClick={() => follow(u.id)}
                                  disabled={isCurrentUserFetching}
                                  style={cursorStyle}>Follow</button>;
 
         return (
-          <div className='users__item' key={u.id}>
-            <div className='users__left'>
-              <div>
-                <NavLink to={'/profile/' + u.id}>
-                  {/*<img src={u.photos.small === null ? userSvg : u.photos.small} alt='u.id + 'photo''/>*/}
-                  <img src={u.photos.small === null ? `http://robohash.org/${u.id}?set=set4` : u.photos.small} alt={u.id + 'photo'}/>
-                </NavLink>
-              </div>
-              <div>
-                {followButton}
-              </div>
-            </div>
-            <div className='users__right'>
-              <div className='users__name'>
-                <div><span>nickname: </span>{u.name}</div>
-                <div><span>status: </span>{u.status === null ? 'no status' : u.status}</div>
-                <div><span>id: </span>{u.id}</div>
-              </div>
-            </div>
-          </div>
+          <User key={u.id} id={u.id} smallPhoto={u.photos.small}
+                followButton={followButton} name={u.name} status={u.status} />
         )
       })}
     </section>
-  )
-};
+
+export default Users;

@@ -5,18 +5,18 @@ import { RenderTextarea } from "../../common/FormControls/FormControls";
 
 const maxLength10 = maxLengthValidate(10);
 
-const MyPostsForm = (props) => {
-  return <form onSubmit={props.handleSubmit}>
+const MyPostsForm = ({ handleSubmit }) => (
+  <form onSubmit={handleSubmit}>
     <h3>My posts</h3>
-    <Field type='text'
-           component={RenderTextarea}
-           name='addPostTextArea'
-           placeholder='add your post here...'
-           validate={[requiredFields, maxLength10]}
+    <Field
+      type="text"
+      component={RenderTextarea}
+      name="addPostTextArea"
+      placeholder="add your post here..."
+      validate={[requiredFields, maxLength10]}
     />
-    <button type='submit'>Add post</button>
+    <button type="submit">Add post</button>
   </form>
-};
+);
 
-
-export default reduxForm({form: 'myPostsForm'})(MyPostsForm);
+export default reduxForm({ form: "myPostsForm" })(MyPostsForm);
