@@ -6,12 +6,13 @@ import {
   setUserProfile,
   setUserProfileThunk,
   setUserStatusThunk,
+  setUserAvatarThunk
 } from "../../redux/profile-reducer";
 import { compose } from "redux";
 import { Redirect } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  refreshProfile(){
     const urlId = this.props.match.params.userID;
     const userId = this.props.userId;
     if(urlId){
@@ -21,15 +22,27 @@ class ProfileContainer extends React.Component {
       this.props.setUserProfileThunk(userId);
       this.props.getUserStatusThunk(userId);
     }
+  }
+  componentDidMount() {
+    this.refreshProfile();
   };
+  componentDidUpdate(prevProps){
+    if(prevProps.match.params.userID !== this.props.match.params.userID){
+      this.refreshProfile();
+    }
+  }
 
   render() {
+    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth, avatarUploadSucceeded } = this.props;
     return !(this.props.match.params.userID || this.props.userId) ? 
       <Redirect to='/login'/> :      
-      <Profile profile={this.props.profile}
-              status={this.props.status}
-              setUserStatusThunk={this.props.setUserStatusThunk}
-              isAuth={this.props.isAuth}
+      <Profile profile={profile}
+               status={status}
+               setUserStatusThunk={setUserStatusThunk}
+               setUserAvatarThunk={setUserAvatarThunk}
+               avatarUploadSucceeded={avatarUploadSucceeded}
+               isAuth={isAuth}
+               isOwner={!this.props.match.params.userID}
       />
   };
 }
@@ -38,9 +51,10 @@ const mapStateToProps = (state) => ({
   profile: state.profileComp.profileInfo,
   status: state.profileComp.status,
   userId: state.auth.userId,
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  avatarUploadSucceeded: state.profileComp.avatarUploadSucceeded
 });
-const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk};
+const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk, setUserAvatarThunk};
 
 
 export default compose(

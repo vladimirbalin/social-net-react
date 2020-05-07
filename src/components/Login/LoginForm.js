@@ -24,7 +24,7 @@ const LoginForm = ({ isFetching, handleSubmit, error, loginSucceded, ...otherPro
     <div className='loginpage__buttonblock'>
       <button className={isFetching || loginSucceded ? 'disabled' : ''} type='submit' disabled={isFetching}>Sign in</button>
       {isFetching ? <Loader /> : ''}
-      {loginSucceded ? 'Login succeeded' : ''}
+      {loginSucceded ? <strong className='succeeded'>Login succeeded</strong> : ''}
     </div>
   </form>
 }

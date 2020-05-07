@@ -4,6 +4,7 @@ const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const UPDATE_BY_SYMBOL_STATUS = 'profile/UPDATE_BY_SYMBOL_STATUS';
+const SET_USER_AVATAR = 'profile/SET_USER_AVATAR';
 let id = 100;
 
 let initialState = {
@@ -16,7 +17,8 @@ let initialState = {
     {id: 3, message: 'Hi, how are you??', likesCount: 39},
   ],
   profileInfo: null,
-  status: ''
+  status: '',
+  avatarUploadSucceeded: null
 };
 
 
@@ -48,6 +50,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         status: action.status
       };
+    case SET_USER_AVATAR:
+      return {
+        ...state,
+        avatarUploadSucceeded: action.photo
+      }
     default:
       return state;
   }
@@ -57,6 +64,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (text) => ({type: ADD_POST, text});
 export const setUserProfile = (profileInfo) => ({type: SET_USER_PROFILE, profileInfo});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
+export const setUserAvatar = (photo) => ({type: SET_USER_AVATAR, photo});
 
 export const setUserProfileThunk = (userId) => async (dispatch) => {
   const response = await ProfileAPI.setProfile(userId);
@@ -73,5 +81,12 @@ export const setUserStatusThunk = (status) => async (dispatch) => {
     dispatch(setUserStatus(status));
   };
 };
+export const setUserAvatarThunk = (file) => async (dispatch) => {
+  const response = await ProfileAPI.setUserAvatar(file);
+  
+  if(response.resultCode === 0){
+    dispatch(setUserAvatar(response.data.photos.small))
+  };
+}
 
 export default profileReducer;
