@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const User = ({ key, id, smallPhoto, followButton, name, status }) => {
+const User = ({ id, smallPhoto, followButton, name, status }) => {
   return (
-    <div className='users__item' key={key}>
+    <div className='users__item'>
       <div className='users__left'>
       <div>
         <NavLink to={'/profile/' + id}>

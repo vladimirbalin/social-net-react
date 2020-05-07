@@ -1,13 +1,14 @@
 import React from "react";
 import './LoginForm.styles.scss';
+import Loader from "../common/Loader/Loader";
 import { reduxForm } from "redux-form";
 import { requiredFields } from "../../services/validators";
 import { RenderInput } from "../common/FormControls/FormControls";
 import { createField } from "../common/FormControls/FormControls";
 
-const LoginForm = ({ handleSubmit, error, submitting, ...otherProps }) => 
-
-  <form onSubmit={handleSubmit} className='loginpage__form'>
+const LoginForm = ({ isFetching, handleSubmit, error, loginSucceded, ...otherProps }) => {
+  
+  return  <form onSubmit={handleSubmit} className='loginpage__form'>
     <div className='loginpage__item'>
       {createField('email', 'Login', 'login', 
                     [requiredFields], RenderInput, 'text')}
@@ -20,8 +21,12 @@ const LoginForm = ({ handleSubmit, error, submitting, ...otherProps }) =>
       {createField('rememberMe', 'Запомнить меня', '', [], RenderInput, 'checkbox')}
     </div>
     {error && <p className='loginpage__summary-error'>{error}</p>}
-    <button className={submitting ? 'disabled' : ''} type='submit' disabled={submitting}>Sign in</button>
+    <div className='loginpage__buttonblock'>
+      <button className={isFetching || loginSucceded ? 'disabled' : ''} type='submit' disabled={isFetching}>Sign in</button>
+      {isFetching ? <Loader /> : ''}
+      {loginSucceded ? 'Login succeeded' : ''}
+    </div>
   </form>
-
+}
 export default reduxForm({form: 'login'})(LoginForm);
 

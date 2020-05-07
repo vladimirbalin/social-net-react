@@ -1,3 +1,5 @@
+$buttonWidth: 90px;
+
 .loginpage {
   &__item {
     padding: 5px;
@@ -9,7 +11,8 @@
       padding-left: 134px;
       label{
         order: 1;
-        flex-basis: 17%;
+        flex-basis: 20%;
+        text-align: left;
       }
       input{
         order: 2;
@@ -17,6 +20,19 @@
       span{
         order: 3;
       }
+    }
+  }
+  &__buttonblock{
+    position: relative;
+  }
+  .preloader{
+    position: absolute;
+    right: 50%;
+    transform: translateX(calc(#{$buttonWidth} + 5px));
+    top: 0;
+    img{
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -31,7 +47,7 @@
   &__form {
     button {     
       display: block;
-      width: 90px;
+      width: $buttonWidth;
       height: 40px;
       margin: 15px auto;
       color: white;
@@ -39,6 +55,7 @@
       padding: 0;
       &.disabled{
         opacity: .2;
+        cursor: progress;
       }
     }
   }

@@ -12,8 +12,7 @@ const DialogsForm = ({ handleSubmit }) => {
             component={RenderTextarea}
             name='dialogsTextarea'
             validate={[requiredFields]}
-            placeholder='add your message here...'
-            
+            placeholder='add your message here...'            
       />
 
       <button type='submit'>add message</button>

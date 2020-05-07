@@ -5,19 +5,22 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginThunk } from "../../redux/auth-reducer";
 
-const Login = ({ loginThunk, isAuth }) => {
+const Login = ({ loginThunk, isAuth, isFetching, loginSucceded }) => {
   const handleSubmit = (formData) => {
     loginThunk(formData);
   }
   return isAuth ? <Redirect to={'/profile'}/> :
     <section className='loginpage'>
       <h1>Залогиньтесь пожалуйста</h1>
-      <LoginForm loginThunk={loginThunk} onSubmit={handleSubmit}/>
+      <LoginForm isFetching={isFetching} loginSucceded={loginSucceded} loginThunk={loginThunk} onSubmit={handleSubmit}/>
+      
     </section>
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  isFetching: state.auth.isFetching,
+  loginSucceded: state.auth.loginSucceded
 });
 
 
