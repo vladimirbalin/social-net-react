@@ -3,7 +3,7 @@ import './Profile.styles.scss';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = ({ profile, status, setUserStatusThunk, isAuth, isOwner, setUserAvatarThunk, avatarUploadSucceeded }) => {
+const Profile = ({ profile, status, setUserStatusThunk, isAuth, isOwner, setUserAvatarThunk, isFetchingAvatar }) => {
 
 
   return (
@@ -11,9 +11,9 @@ const Profile = ({ profile, status, setUserStatusThunk, isAuth, isOwner, setUser
         <ProfileInfo profile={profile}
                      status={status}
                      setUserStatusThunk={setUserStatusThunk}
-                     avatarUploadSucceeded={avatarUploadSucceeded}
                      isOwner={isOwner}
                      setUserAvatarThunk={setUserAvatarThunk}
+                     isFetchingAvatar={isFetchingAvatar}
         />    
         
       {isAuth ? 

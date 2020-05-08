@@ -17,19 +17,19 @@ export default function ProfileStatus({ status, setUserStatusThunk }) {
   };
 
   return (
-    <div>
+    <div className='profile__item'>
       {!editMode && (
-        <div>
-          <span className='profile__subtitles' onDoubleClick={() => setMode(true)}>status: </span>{status}
-        </div>
+          <>
+            <span className='profile__subtitles'
+                onDoubleClick={() => setMode(true)}>status: </span>
+            <span className='profile__descr'>{status}</span>
+          </>
       )}
       {editMode && (
         <div>
-          <input
-            onBlur={() => {
-              setMode(false);
-              sendHandler();
-            }}
+          <input onBlur={() => {
+            setMode(false);
+            sendHandler();}}
             onChange={changeHandler}
             value={tempStatus}
             autoFocus={true}

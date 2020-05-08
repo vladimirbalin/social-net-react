@@ -33,16 +33,16 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth, avatarUploadSucceeded } = this.props;
+    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth, isFetchingAvatar } = this.props;
     return !(this.props.match.params.userID || this.props.userId) ? 
       <Redirect to='/login'/> :      
       <Profile profile={profile}
                status={status}
                setUserStatusThunk={setUserStatusThunk}
                setUserAvatarThunk={setUserAvatarThunk}
-               avatarUploadSucceeded={avatarUploadSucceeded}
                isAuth={isAuth}
                isOwner={!this.props.match.params.userID}
+               isFetchingAvatar={isFetchingAvatar}
       />
   };
 }
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
   status: state.profileComp.status,
   userId: state.auth.userId,
   isAuth: state.auth.isAuth,
-  avatarUploadSucceeded: state.profileComp.avatarUploadSucceeded
+  isFetchingAvatar: state.profileComp.isFetchingAvatar
 });
 const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk, setUserAvatarThunk};
 

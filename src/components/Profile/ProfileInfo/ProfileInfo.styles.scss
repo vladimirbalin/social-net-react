@@ -1,17 +1,16 @@
 .profile {
-  &__avatar {
-    border: 2px solid gray;
-    border-radius: 5px;
-    display: block;
-    margin-bottom: 10px;
+  &__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    padding: 15px 15px 0 15px;
+    min-height: 200px;
   }
-  &__subtitles {
-    color: #4b4b4b;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  &__icon{
-    width: 20px;
-    height: 20px;
+  .preloader{
+    min-height: 122.4px;
+    padding-left: 40px;
+    justify-content: flex-start;
+    align-items: center;
   }
 }

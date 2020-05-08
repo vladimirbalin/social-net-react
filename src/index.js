@@ -1,3 +1,4 @@
+import './index.scss';
 import store from './redux/redux-store';
 import ReactDOM from "react-dom";
 import App from "./components/App/App";

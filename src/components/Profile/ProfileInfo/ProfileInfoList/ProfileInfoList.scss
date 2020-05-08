@@ -1,0 +1,20 @@
+.profile{
+  &__item{
+    display: flex;
+  }
+  &__subtitles {
+    color: #828282;
+    font-size: 16px;
+    font-weight: 700;
+    flex-basis: 200px;
+    text-align: right;
+    margin-right: 10px;
+  }
+  &__descr{
+    font-size: 15px;
+  }
+  &__icon{
+    width: 15px;
+    height: 15px;
+  }
+}

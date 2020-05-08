@@ -1,0 +1,44 @@
+.profile__avatar-block{
+  min-height: 122.4px;
+  margin-bottom: 15px;
+  padding-left: 150px;
+  .profile__avatar {
+    border: 1px solid gray;
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  label{
+    cursor: pointer;
+    display: block;
+    padding-left: 7px;
+    font-size: 13px;
+    opacity: .5;
+    transition: opacity .3s;
+    border: 1px solid transparent;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 102px;
+    img{
+      width: 30px;
+      height: 30px;
+      transition: opacity .2s;
+    }
+    img:hover{
+      opacity: .5;
+    }
+  }
+  label:hover{
+    opacity: 1;
+    border: 1px solid gray;
+    background-color: bisque;
+  }
+}
