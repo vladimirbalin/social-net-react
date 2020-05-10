@@ -19,17 +19,18 @@ const CreateFormControl = render => ({ input, label, meta: { submitFailed, error
 
 export const RenderInput = CreateFormControl((input, id, rest) => 
   <input id={id} {...input} {...rest}/>
-)
+);
 
 export const RenderTextarea = CreateFormControl((input, id, rest) => 
   <textarea id={id} {...input} {...rest} />
-)
+);
 
 export const createField = (name, label, placeholder, 
-                            validators, component, type) => 
+                            validators, component, type, value) =>
   <Field name={name} label={label}
     placeholder={placeholder}
     component={component}
     validate={validators}
-    type={type} 
-  />
+    type={type}
+    value={value}
+  />;

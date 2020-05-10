@@ -13,8 +13,22 @@
   &__descr{
     font-size: 15px;
   }
-  &__icon{
-    width: 15px;
-    height: 15px;
+  &__item{
+    .form-wrap{
+      display: flex;
+      width: 100%;
+      label{
+        order: 1;
+        color: #828282;
+        font-size: 16px;
+        font-weight: 700;
+        flex-basis: 200px;
+        text-align: right;
+        margin-right: 10px;
+      }
+      input{
+        order: 2;
+      }
+    }
   }
 }

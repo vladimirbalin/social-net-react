@@ -18,8 +18,8 @@ const ProfileAvatar = ({ profile, isOwner, setUserAvatarThunk, isFetchingAvatar 
                                id="file"
                                className="inputfile"
                                onChange={setUserAvatar}/>
-                        <label htmlFor="file">cменить аватар</label>
-                      </>}
+                        <label htmlFor="file">cменить аватар</label></>
+          }
         </>}
       </div>
   )

@@ -6,7 +6,9 @@ import {
   setUserProfile,
   setUserProfileThunk,
   setUserStatusThunk,
-  setUserAvatarThunk
+  setUserAvatarThunk,
+  saveProfile,
+  setProfileInfoTransmitted
 } from "../../redux/profile-reducer";
 import { compose } from "redux";
 import { Redirect } from 'react-router-dom';
@@ -33,7 +35,8 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth, isFetchingAvatar } = this.props;
+    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth,
+      isFetchingAvatar, isFetchingProfileInfo, saveProfile, isProfileInfoTransmitted, setProfileInfoTransmitted } = this.props;
     return !(this.props.match.params.userID || this.props.userId) ? 
       <Redirect to='/login'/> :      
       <Profile profile={profile}
@@ -43,18 +46,26 @@ class ProfileContainer extends React.Component {
                isAuth={isAuth}
                isOwner={!this.props.match.params.userID}
                isFetchingAvatar={isFetchingAvatar}
+               isFetchingProfileInfo={isFetchingProfileInfo}
+               saveProfile={saveProfile}
+               isProfileInfoTransmitted={isProfileInfoTransmitted}
+               setProfileInfoTransmitted={setProfileInfoTransmitted}
       />
   };
 }
 
 const mapStateToProps = (state) => ({
   profile: state.profileComp.profileInfo,
+  profileInfoTable: state.profileComp.profileInfoTable,
   status: state.profileComp.status,
   userId: state.auth.userId,
   isAuth: state.auth.isAuth,
-  isFetchingAvatar: state.profileComp.isFetchingAvatar
+  isFetchingAvatar: state.profileComp.isFetchingAvatar,
+  isFetchingProfileInfo: state.profileComp.isFetchingProfileInfo,
+  isProfileInfoTransmitted: state.profileComp.isProfileInfoTransmitted,
 });
-const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk, setUserAvatarThunk};
+const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk, setUserAvatarThunk,
+  saveProfile, setProfileInfoTransmitted};
 
 
 export default compose(

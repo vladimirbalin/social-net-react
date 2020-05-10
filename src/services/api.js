@@ -80,6 +80,21 @@ export const ProfileAPI = {
       .then(response => {
         return response.data;
       })
+  },
+  saveProfile(formData){
+    return instance.put(`profile`, formData)
+      .then(response => {
+        return response.data;
+      })
   }
 };
 
+export const SecurityAPI = {
+  getCaptchaUrl(){
+    return instance.get(`security/get-captcha-url`)
+      .then(response => {
+        return response.data;
+      })
+  },
+
+}

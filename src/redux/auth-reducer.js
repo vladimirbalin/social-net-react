@@ -1,9 +1,10 @@
-import { AuthAPI } from "../services/api";
+import { AuthAPI, SecurityAPI } from "../services/api";
 import { stopSubmit } from "redux-form";
 
 const TO_AUTH = "auth/TO_AUTH";
 const IS_FETCHING = "auth/IS_FETCHING";
 const LOGIN_SUCCEEDED = "auth/LOGIN_SUCCEEDED";
+const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL";
 
 let initialState = {
   login: null,
@@ -11,7 +12,8 @@ let initialState = {
   userId: null,
   isAuth: false,
   isFetching: false,
-  loginSucceded: false
+  loginSucceded: false,
+  captchaUrl: ''
 };
 
 const authReducers = (state = initialState, action) => {
@@ -31,6 +33,11 @@ const authReducers = (state = initialState, action) => {
         ...state,
         loginSucceded: action.loginSucceded,
       };
+    case SET_CAPTCHA_URL:
+      return {
+        ...state,
+        captchaUrl: action.url
+      }
     default:
       return state;
   }
@@ -41,6 +48,8 @@ export const setAuth = (login, email, userId, isAuth) => ({
   type: TO_AUTH,
   authInfo: { login, email, userId, isAuth },
 });
+export const setCaptchaUrl = (url) => ({type: SET_CAPTCHA_URL, url})
+
 export const getAuthUserData = () =>  async (dispatch) => {
   const response = await AuthAPI.auth();
 
@@ -57,12 +66,20 @@ export const loginThunk = (formData) => async (dispatch) => {
     dispatch(isFetching(false));
     dispatch(getAuthUserData());
     dispatch(loginSucceded(true));
+  } else if(response.resultCode === 1){
+    dispatch(isFetching(false));
+    let messageError = response.messages.length
+      ? response.messages[0]
+      : "something went wrong";
+    let action = stopSubmit("login", {_error: messageError});
+    dispatch(action);
   } else {
     dispatch(isFetching(false));
-    let messageError = response.data.messages.length
-      ? response.data.messages[0]
+    dispatch(getCaptchaUrl());
+    let messageError = response.messages.length
+      ? response.messages[0]
       : "something went wrong";
-    let action = stopSubmit("login", { _error: messageError });
+    let action = stopSubmit("login", {_error: messageError});
     dispatch(action);
   }
 };
@@ -78,4 +95,12 @@ export const logoutThunk = () => async (dispatch) => {
     dispatch(isFetching(false));
   }
 };
+
+export const getCaptchaUrl = () => async (dispatch) => {
+  const response = await SecurityAPI.getCaptchaUrl();
+  const captcha = response.url;
+  dispatch(setCaptchaUrl(captcha));
+}
+
+
 export default authReducers;

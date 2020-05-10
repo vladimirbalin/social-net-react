@@ -1,4 +1,5 @@
 import { ProfileAPI } from "../services/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -6,6 +7,8 @@ const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const UPDATE_BY_SYMBOL_STATUS = 'profile/UPDATE_BY_SYMBOL_STATUS';
 const SET_USER_AVATAR = 'profile/SET_USER_AVATAR';
 const SET_FETCHING_AVATAR = 'profile/SET_FETCHING_AVATAR';
+const SET_FETCHING_PROFILE_INFO = 'profile/SET_FETCHING_PROFILE_INFO';
+const SET_PROFILE_INFO_TRANSMITTED = 'profile/SET_PROFILE_INFO_TRANSMITTED';
 
 let id = 100;
 
@@ -20,7 +23,9 @@ let initialState = {
   ],
   profileInfo: null,
   status: '',
-  isFetchingAvatar: false
+  isFetchingAvatar: false,
+  isFetchingProfileInfo: false,
+  isProfileInfoTransmitted: false
 };
 
 
@@ -62,6 +67,16 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         isFetchingAvatar: action.isFetching
       };
+    case SET_FETCHING_PROFILE_INFO:
+      return {
+        ...state,
+        isFetchingProfileInfo: action.isFetching
+      };
+    case SET_PROFILE_INFO_TRANSMITTED:
+      return {
+        ...state,
+        isProfileInfoTransmitted: action.transmitStatus
+      };
     default:
       return state;
   }
@@ -72,12 +87,14 @@ export const addPost = (text) => ({type: ADD_POST, text});
 export const setUserProfile = (profileInfo) => ({type: SET_USER_PROFILE, profileInfo});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export const setUserAvatar = (photo) => ({type: SET_USER_AVATAR, photo});
-export const setFetching = (isFetching) => ({type: SET_FETCHING_AVATAR, isFetching});
+export const setFetchingAvatar = (isFetching) => ({type: SET_FETCHING_AVATAR, isFetching});
+export const setFetchingProfileInfo = (isFetching) => ({type: SET_FETCHING_PROFILE_INFO, isFetching});
+export const setProfileInfoTransmitted = (transmitStatus) => ({type: SET_PROFILE_INFO_TRANSMITTED, transmitStatus});
 
 export const setUserProfileThunk = (userId) => async (dispatch) => {
-  dispatch(setFetching(true));
+  dispatch(setFetchingProfileInfo(true));
   const response = await ProfileAPI.setProfile(userId);
-  dispatch(setFetching(false));
+  dispatch(setFetchingProfileInfo(false));
   dispatch(setUserProfile(response));
 };
 export const getUserStatusThunk = (userId) => async (dispatch) => {
@@ -92,11 +109,28 @@ export const setUserStatusThunk = (status) => async (dispatch) => {
   }
 };
 export const setUserAvatarThunk = (file) => async (dispatch) => {
-  dispatch(setFetching(true));
+  dispatch(setFetchingAvatar(true));
   const response = await ProfileAPI.setUserAvatar(file);
-  dispatch(setFetching(false));
+  dispatch(setFetchingAvatar(false));
   if(response.resultCode === 0){
     dispatch(setUserAvatar(response.data.photos))
+  }
+};
+
+export const saveProfile = (formData) => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  const response = await ProfileAPI.saveProfile(formData);
+  if(response.resultCode === 0){
+    await dispatch(setProfileInfoTransmitted(true));
+    dispatch(setUserProfileThunk(userId));
+  } else {
+    let messageError = response.messages.length ?
+      response.messages[0]
+      : 'something went wrong';
+
+    let action = stopSubmit("profileInfo", {_error: messageError});
+    dispatch(action);
+    return Promise.reject(messageError)
   }
 };
 

@@ -124,6 +124,12 @@ $buttonWidth: 90px;
     }
 
   }
+  &__captcha{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
   .succeeded{
     color: green;
   }

@@ -6,8 +6,9 @@ import { requiredFields } from "../../services/validators";
 import { RenderInput } from "../common/FormControls/FormControls";
 import { createField } from "../common/FormControls/FormControls";
 
-const LoginForm = ({ isFetching, handleSubmit, error, loginSucceded, ...otherProps }) => {
-  
+const LoginForm = ({ isFetching, handleSubmit, error, loginSucceded, captchaUrl, ...otherProps }) => {
+console.log(captchaUrl, error)
+
   return  <form onSubmit={handleSubmit} className='loginpage__form'>
     <div className='loginpage__item'>
       {createField('email', 'Login', 'login', 
@@ -20,7 +21,12 @@ const LoginForm = ({ isFetching, handleSubmit, error, loginSucceded, ...otherPro
     <div className='loginpage__checkbox'>
       {createField('rememberMe', 'Запомнить меня', '', [], RenderInput, 'checkbox')}
     </div>
-    {error && <p className='loginpage__summary-error'>{error}</p>}
+    {captchaUrl && <div className='loginpage__captcha'>
+      <img src={captchaUrl} alt ="captcha" />
+      <span>Введите код с картинки</span>
+      {createField('captcha', '', '', [requiredFields], RenderInput, 'text')}
+      <span className='loginpage__summary-error'>{error}</span>
+    </div>}
     <div className='loginpage__buttonblock'>
       <button className={isFetching || loginSucceded ? 'disabled' : ''} type='submit' disabled={isFetching}>Sign in</button>
       {isFetching ? <Loader /> : ''}

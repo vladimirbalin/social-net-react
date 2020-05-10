@@ -5,14 +5,16 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginThunk } from "../../redux/auth-reducer";
 
-const Login = ({ loginThunk, isAuth, isFetching, loginSucceded }) => {
+const Login = ({ loginThunk, isAuth, isFetching, loginSucceded, captchaUrl }) => {
   const handleSubmit = (formData) => {
-    loginThunk(formData);
+    const captcha = loginThunk(formData);
+    captcha.then((url) => console.log(url))
   }
   return isAuth ? <Redirect to={'/profile'}/> :
     <section className='loginpage'>
       <h1>Залогиньтесь пожалуйста</h1>
-      <LoginForm isFetching={isFetching} loginSucceded={loginSucceded} loginThunk={loginThunk} onSubmit={handleSubmit}/>
+      <LoginForm isFetching={isFetching} loginSucceded={loginSucceded} 
+        loginThunk={loginThunk} onSubmit={handleSubmit} captchaUrl={captchaUrl}/>
       
     </section>
 };
@@ -20,7 +22,8 @@ const Login = ({ loginThunk, isAuth, isFetching, loginSucceded }) => {
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   isFetching: state.auth.isFetching,
-  loginSucceded: state.auth.loginSucceded
+  loginSucceded: state.auth.loginSucceded,
+  captchaUrl: state.auth.captchaUrl
 });
 
 

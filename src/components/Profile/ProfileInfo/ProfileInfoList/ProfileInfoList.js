@@ -1,33 +1,40 @@
 import React from "react";
 import './ProfileInfoList.scss';
-import thumbUpSvg from "../../../../assets/img/like.svg";
-import thumbDownSvg from "../../../../assets/img/dislike.svg";
-
-const ProfileInfoItem = ({ contactTitle, contactInfo }) =>
-  <div className='profile__item'>
-    <span className='profile__subtitles'>{contactTitle}</span>
-    <span className='profile__descr'>{contactInfo}</span><br/>
-  </div>
+import Loader from "../../../common/Loader/Loader";
 
 
-const ProfileInfoList = ({ profile }) => {
+const ProfileInfoList = ({ profile, editModeOn, isFetchingProfileInfo }) => {
 
-  return <>
-    <ProfileInfoItem contactTitle='info: ' contactInfo={profile.aboutMe}/>
-    {profile.lookingForAJob ?
-      <><ProfileInfoItem contactTitle='looking for a job?: ' contactInfo={<img className='profile__icon' src={thumbUpSvg} alt='thumbup'/>}/>
-        <ProfileInfoItem contactTitle='lookingForAJobDescription: ' contactInfo={profile.lookingForAJobDescription}/>
-      </> :
-      <ProfileInfoItem contactTitle='looking for a job?: ' contactInfo={<img className='profile__icon' src={thumbDownSvg} alt='thumbup'/>}/>
-    }
+  return <div className='profile__list'>
+    {isFetchingProfileInfo ? <Loader /> :
+      <><button onClick={editModeOn}>edit profile</button>
+      <div className='profile__item'>
+        <span className='profile__subtitles'>Full name</span>
+        <span className='profile__descr'>{profile.fullName}</span><br/>
+      </div>
+      <div className='profile__item'>
+        <span className='profile__subtitles'>Looking for a Job?</span>
+        <span className='profile__descr'>{profile.lookingForAJob ? 'yes' : 'no'}</span><br/>
+      </div>
+      <div className='profile__item'>
+        <span className='profile__subtitles'>Professional skills</span>
+        <span className='profile__descr'>{profile.lookingForAJobDescription}</span><br/>
+      </div>
+      <div className='profile__item'>
+        <span className='profile__subtitles'>About me:</span>
+        <span className='profile__descr'>{profile.aboutMe}</span><br/>
+      </div>
+      <div className='profile__item'>
+        <span className='profile__subtitles'>Contacts</span><br/>
+      </div>
+        {Object.keys(profile.contacts).map( website =>
+          <div className='profile__item' key={website}>
+            <span className='profile__subtitles'>- {website}</span>
+            <span className='profile__descr'>{profile.contacts[website]}</span><br/>
+          </div>)}
+      </>}
 
-    <ProfileInfoItem contactTitle='full name: ' contactInfo={profile.fullname}/>
-    <ProfileInfoItem contactTitle='about me: ' contactInfo={profile.aboutMe}/>
-    <ProfileInfoItem contactTitle='contacts'/>
-    <ProfileInfoItem contactTitle='- github: ' contactInfo={profile.contacts.github}/>
-    <ProfileInfoItem contactTitle='- vk: ' contactInfo={profile.contacts.vk}/>
-    <ProfileInfoItem contactTitle='- facebook: ' contactInfo={profile.contacts.facebook}/>
-  </>
+  </div>;
 };
 
 
