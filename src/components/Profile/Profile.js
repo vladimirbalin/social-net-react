@@ -4,8 +4,6 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = ({ isAuth, ...props}) => {
-
-
   return (
     <section className='profile'>
         <ProfileInfo {...props}/>    

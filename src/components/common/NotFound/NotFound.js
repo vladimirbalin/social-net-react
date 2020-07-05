@@ -10,4 +10,5 @@ const NotFound = ({ location, history }) =>
       <div className='not-found__goback' onClick={history.goBack}>click to go to previous page</div>
     </div>
   </section>
+
 export default NotFound;

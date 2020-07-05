@@ -11,23 +11,23 @@ const Dialogs = ({ sendMessage, state }) => {
   };
 
   return (
-      <div className='dialogs'>
-        <div className='dialogs__names'>
-          {state.dialogsNameData.map(el => <DialogName name={el.name}
-                                                       id={el.id}
-                                                       key={el.id}/>)}
-        </div>
-
-        <div className='dialogs__messages'>
-          <div className='dialogs__items'>
-            {state.dialogsMessages.map(el =>
-              <MessageItem messageContent={el.message}
-                          key={el.id}/>)}   
-          </div>       
-
-          <DialogsForm onSubmit={clickHandler}/>
-        </div>
+    <div className='dialogs'>
+      <div className='dialogs__names'>
+        {state.dialogsNames.map(el => <DialogName name={el.name}
+                                                  id={el.id}
+                                                  key={el.id}/>)}
       </div>
+
+      <div className='dialogs__messages'>
+        <div className='dialogs__items'>
+          {state.dialogsMessages.map(el =>
+            <MessageItem messageContent={el.message}
+                         key={el.id}/>)}
+        </div>
+
+        <DialogsForm onSubmit={clickHandler}/>
+      </div>
+    </div>
   )
 };
 

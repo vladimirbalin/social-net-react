@@ -1,7 +1,7 @@
 import Dialogs from "./Dialogs";
 import { sendMessage } from "../../redux/dialogs-reducer";
 import { connect } from "react-redux";
-import { LoginHOC } from "../hocLogin/LoginHOC";
+import { LoginHOC } from "../common/hocs/hocLogin/LoginHOC";
 import { compose } from "redux";
 
 const mapStateToProps = (state) => {

@@ -6,7 +6,7 @@ import ProfileContainer from "../Profile/ProfileContainer";
 import Login from "../Login/Login";
 import HeaderContainer from '../Header/HeaderContainer';
 import NavBar from '../NavBar/NavBar';
-import NotFound from "../NotFound/NotFound";
+import NotFound from "../common/NotFound/NotFound";
 import Loader from "../common/Loader/Loader";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";

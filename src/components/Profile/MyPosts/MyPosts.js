@@ -4,7 +4,7 @@ import Post from "./Post/Post";
 import MyPostsForm from "./MyPostsForm";
 
 
-const MyPosts = ({ addPost, postData }) => {
+const MyPosts = ({ addPost, posts }) => {
   const clickHandler = (formData) => {
     addPost(formData.addPostTextArea);
     formData.addPostTextarea = '';
@@ -14,7 +14,7 @@ const MyPosts = ({ addPost, postData }) => {
     <section className='my-posts'>
 
         <MyPostsForm onSubmit={clickHandler}/>
-        {postData.map(el => <Post message={el.message}
+        {posts.map(el => <Post message={el.message}
                                   likes={el.likesCount}
                                   key={el.id}/>)}
       
