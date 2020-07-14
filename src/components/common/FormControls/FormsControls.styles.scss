@@ -6,6 +6,7 @@
   }
   &__active{
     animation: .5s ticking;
+    margin-left: 10px;
   }
   &.error{  
     textarea{

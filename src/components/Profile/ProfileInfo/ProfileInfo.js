@@ -16,7 +16,6 @@ const ProfileInfo = ({
     if (isProfileInfoTransmitted) {
       setEditMode(false)
     }
-    ;
   }, [isProfileInfoTransmitted]);
   if (!profile) {
     return <Loader/>;

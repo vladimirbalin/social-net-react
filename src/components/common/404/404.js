@@ -1,5 +1,6 @@
 import React from "react";
-import './NotFound.styles.scss';
+import './404.styles.scss';
+import {  NavLink } from "react-router-dom";
 
 const NotFound = ({ location, history }) => 
   <section className='not-found'>
@@ -7,7 +8,7 @@ const NotFound = ({ location, history }) =>
       whoops, nothing found here <br/>
       Resource not found at '{location.pathname}'
       <hr/>
-      <div className='not-found__goback' onClick={history.goBack}>click to go to previous page</div>
+      <NavLink to='/' className='not-found__goback'>click to go to main page</NavLink>
     </div>
   </section>
 

@@ -1,6 +1,9 @@
 import { UsersAPI } from "../services/api";
-import { updateObjectInArray } from '../services/objects';
+import { updateObjectInArray } from '../services/utils';
 import { UsersType } from "../types/types";
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { RootStateType } from "./redux-store";
 
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
@@ -9,19 +12,21 @@ const SET_CURRENT_PAGE = 'users/SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
 const BUTTON_IS_DISABLED = 'users/BUTTON_IS_DISABLED';
+const SET_PORTION_NUMBER = 'users/SET_PORTION_NUMBER';
 
 
 let initialState = {
   users: [] as Array<UsersType>,
-  pageSize: 5 as number,
+  itemsCountPerPage: 5 as number,
   totalUsersCount: 0 as number,
   currentPage: 1 as number,
   isFetching: false,
-  buttonsDisabled: [] as Array<number>
+  disabledButtons: [] as Array<number>,
+  portionNumber: 1
 };
-export type InitialStateType = typeof initialState;
+export type UsersStateType = typeof initialState;
 
-const usersReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const usersReducer = (state = initialState, action: UsersActionsType): UsersStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -56,16 +61,30 @@ const usersReducer = (state: InitialStateType = initialState, action: any): Init
     case BUTTON_IS_DISABLED:
       return {
         ...state,
-        buttonsDisabled: action.isFetching ?
-          [...state.buttonsDisabled, action.buttonsDisabled] :
-          state.buttonsDisabled.filter(id => id !== action.buttonsDisabled)
-      }
-        ;
+        disabledButtons: action.isFetching ?
+          [...state.disabledButtons, action.disabledButtons] :
+          state.disabledButtons.filter(id => id !== action.disabledButtons)
+      };
+    case SET_PORTION_NUMBER:
+      return {
+        ...state,
+        portionNumber: action.portionNumber
+      };
     default:
       return state;
   }
-
 };
+type UsersActionsType =
+  FollowActionType
+  | UnFollowActionType
+  | SetUsersActionType
+  | SetCurrentPageActionType
+  | SetTotalUsersCountActionType
+  | ToggleIsFetchingActionType
+  | ToggleButtonDisableActionType
+  | SetPortionNumberType
+
+/*---actions---*/
 type FollowActionType = {type: typeof FOLLOW, userID: number};
 export const follow = (userID: number): FollowActionType => ({type: FOLLOW, userID});
 
@@ -75,7 +94,7 @@ export const unFollow = (userID: number): UnFollowActionType => ({type: UNFOLLOW
 type SetUsersActionType = {type: typeof SET_USERS, users: Array<UsersType>};
 export const setUsers = (users: Array<UsersType>): SetUsersActionType => ({type: SET_USERS, users});
 
-type SetCurrentPageActionType = {type: typeof SET_CURRENT_PAGE, currentPage: number};
+export type SetCurrentPageActionType = {type: typeof SET_CURRENT_PAGE, currentPage: number};
 export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({
   type: SET_CURRENT_PAGE,
   currentPage
@@ -93,32 +112,36 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionTyp
   isFetching
 });
 
-type ToggleButtonDisableActionType = {type: typeof BUTTON_IS_DISABLED, isFetching: boolean, buttonsDisabled: number};
-export const toggleButtonDisable = (isFetching: boolean, buttonsDisabled: number): ToggleButtonDisableActionType => ({
+type ToggleButtonDisableActionType = {type: typeof BUTTON_IS_DISABLED, isFetching: boolean, disabledButtons: number};
+export const toggleButtonDisable = (isFetching: boolean, disabledButtons: number): ToggleButtonDisableActionType => ({
   type: BUTTON_IS_DISABLED,
   isFetching,
-  buttonsDisabled
+  disabledButtons
 });
 
-export const getUsersThunk = (currentPage: number, pageSize: number) => async (dispatch: any) => {
-  dispatch(toggleIsFetching(true));
-  const response = await UsersAPI.setUsers(currentPage, pageSize);
+export type SetPortionNumberType = {type: typeof SET_PORTION_NUMBER, portionNumber: number};
+export const setPortionNumber = (portionNumber: number): SetPortionNumberType => ({
+  type: SET_PORTION_NUMBER,
+  portionNumber
+})
 
-  dispatch(toggleIsFetching(false));
-  dispatch(setUsers(response.items));
-  dispatch(setTotalUsersCount(response.totalCount));
-};
-export const setCurrentPageThunk = (pageClicked: number, pageSize: number) => async (dispatch: any) => {
-  dispatch(toggleIsFetching(true));
-  const response = await UsersAPI.pageClicked(pageClicked, pageSize);
+/*---thunks---*/
+type UsersThunkType = ThunkAction<Promise<void>, RootStateType, unknown, UsersActionsType>;
+export const getUsersThunk = (currentPage: number, itemsCountPerPage: number): UsersThunkType =>
+  async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    const response = await UsersAPI.setUsers(currentPage, itemsCountPerPage);
 
-  dispatch(toggleIsFetching(false));
-  dispatch(setUsers(response.items))
-  dispatch(setCurrentPage(pageClicked));
-};
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.items));
+    dispatch(setTotalUsersCount(response.totalCount));
+    dispatch(setCurrentPage(currentPage));
+  };
 
-export const followUnfollowFlow = async (dispatch: any, userId: number,
-                                         apiMethod: any, actionCreator: any) => {
+export const followUnfollowFlow = async (dispatch: Dispatch<UsersActionsType>,
+                                         userId: number,
+                                         apiMethod: any,
+                                         actionCreator: (userId: number) => FollowActionType | UnFollowActionType) => {
   dispatch(toggleButtonDisable(true, userId));
   const response = await apiMethod(userId);
 
@@ -127,12 +150,11 @@ export const followUnfollowFlow = async (dispatch: any, userId: number,
     dispatch(toggleButtonDisable(false, userId));
   }
 };
-
-export const followThunk = (userId: number) => (dispatch: any) => {
-  followUnfollowFlow(dispatch, userId, UsersAPI.follow, follow);
+export const followThunk = (userId: number): UsersThunkType => async (dispatch) => {
+  await followUnfollowFlow(dispatch, userId, UsersAPI.follow, follow);
 };
-export const unfollowThunk = (userId: number) => (dispatch: any) => {
-  followUnfollowFlow(dispatch, userId, UsersAPI.unFollow, unFollow);
+export const unfollowThunk = (userId: number): UsersThunkType => async (dispatch) => {
+  await followUnfollowFlow(dispatch, userId, UsersAPI.unFollow, unFollow);
 };
 
 export default usersReducer;

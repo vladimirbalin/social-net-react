@@ -1,11 +1,12 @@
 import { ProfileAPI } from "../services/api";
-import { stopSubmit } from "redux-form";
+import { FormAction, stopSubmit } from "redux-form";
 import { PhotosType, PostsType, ProfileInfoType } from '../types/types';
+import { ThunkAction } from "redux-thunk";
+import { RootStateType } from "./redux-store";
 
 const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
-const UPDATE_BY_SYMBOL_STATUS = 'profile/UPDATE_BY_SYMBOL_STATUS';
 const SET_USER_AVATAR = 'profile/SET_USER_AVATAR';
 const SET_FETCHING_AVATAR = 'profile/SET_FETCHING_AVATAR';
 const SET_FETCHING_PROFILE_INFO = 'profile/SET_FETCHING_PROFILE_INFO';
@@ -28,9 +29,9 @@ let initialState = {
   isFetchingProfileInfo: false,
   isProfileInfoTransmitted: false
 };
-export type InitialStateType = typeof initialState;
+export type ProfileStateType = typeof initialState;
 
-const profileReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ProfileActionsType): ProfileStateType => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -41,11 +42,6 @@ const profileReducer = (state: InitialStateType = initialState, action: any): In
       return {
         ...state,
         posts: [...state.posts, newPost]
-      };
-    case UPDATE_BY_SYMBOL_STATUS:
-      return {
-        ...state,
-        status: action.text
       };
     case SET_USER_PROFILE:
       return {
@@ -82,7 +78,15 @@ const profileReducer = (state: InitialStateType = initialState, action: any): In
       return state;
   }
 };
+type ProfileActionsType = AddPostActionType
+  | SetUserProfileActionType
+  | SetUserStatusActionType
+  | SetUserAvatarActionType
+  | SetFetchingAvatarActionType
+  | SetFetchingProfileInfoActionType
+  | SetProfileInfoTransmittedActionType;
 
+/*---actions---*/
 type AddPostActionType = {type: typeof ADD_POST, text: string};
 export const addPost = (text: string): AddPostActionType => ({type: ADD_POST, text});
 
@@ -116,24 +120,31 @@ export const setProfileInfoTransmitted = (transmitStatus: boolean): SetProfileIn
   transmitStatus
 });
 
-export const setUserProfileThunk = (userId: number) => async (dispatch: any) => {
+
+
+/*---thunks---*/
+type ProfileThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ProfileActionsType | FormAction>
+export const setUserProfileThunk = (userId: number | null): ProfileThunkType => async (dispatch) => {
   dispatch(setFetchingProfileInfo(true));
   const response = await ProfileAPI.setProfile(userId);
   dispatch(setFetchingProfileInfo(false));
   dispatch(setUserProfile(response));
 };
-export const getUserStatusThunk = (userId: number) => async (dispatch: any) => {
+
+export const getUserStatusThunk = (userId: number): ProfileThunkType => async (dispatch) => {
   const response = await ProfileAPI.getStatus(userId);
   dispatch(setUserStatus(response));
 
 };
-export const setUserStatusThunk = (status: string) => async (dispatch: any) => {
+
+export const setUserStatusThunk = (status: string): ProfileThunkType => async (dispatch) => {
   const response = await ProfileAPI.setStatus(status);
   if (response.resultCode === 0) {
     dispatch(setUserStatus(status));
   }
 };
-export const setUserAvatarThunk = (file: string) => async (dispatch: any) => {
+
+export const setUserAvatarThunk = (file: string): ProfileThunkType => async (dispatch) => {
   dispatch(setFetchingAvatar(true));
   const response = await ProfileAPI.setUserAvatar(file);
   dispatch(setFetchingAvatar(false));
@@ -142,7 +153,7 @@ export const setUserAvatarThunk = (file: string) => async (dispatch: any) => {
   }
 };
 
-export const saveProfile = (formData: ProfileInfoType) => async (dispatch: any, getState: any) => {
+export const saveProfile = (formData: ProfileInfoType): ProfileThunkType => async (dispatch, getState) => {
   const userId = getState().auth.userId;
   const response = await ProfileAPI.saveProfile(formData);
   if (response.resultCode === 0) {

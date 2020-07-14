@@ -6,28 +6,48 @@ import { requiredFields } from "../../services/validators";
 import { RenderInput } from "../common/FormControls/FormControls";
 import { createField } from "../common/FormControls/FormControls";
 
-const LoginForm = ({ isFetching, handleSubmit, error, loginSucceeded, captchaUrl, ...otherProps }) => {
-
+const LoginForm = ({ isFetching, handleSubmit, error, loginSucceeded, captchaUrl }) => {
   return <form onSubmit={handleSubmit} className='loginpage__form'>
     <div className='loginpage__item'>
-      {createField('email', 'Login', 'login',
-        [requiredFields], RenderInput, 'text')}
+      {createField(
+        'email',
+        'Login',
+        'login',
+        [requiredFields],
+        RenderInput,
+        'text')}
     </div>
     <div className='loginpage__item'>
-      {createField('password', 'Password', 'pass',
-        [requiredFields], RenderInput, 'password')}
+      {createField(
+        'password',
+        'Password',
+        'pass',
+        [requiredFields],
+        RenderInput,
+        'password')}
     </div>
     <div className='loginpage__checkbox'>
-      {createField('rememberMe', 'Запомнить меня', '',
-        [], RenderInput, 'checkbox')}
+      {createField(
+        'rememberMe',
+        'Запомнить меня',
+        '',
+        [],
+        RenderInput,
+        'checkbox')}
     </div>
-    {captchaUrl && <div className='loginpage__captcha'>
-      <img src={captchaUrl} alt="captcha"/>
-      <span>Введите код с картинки</span>
-      {createField('captcha', '', '',
-        [requiredFields], RenderInput, 'text')}
-      <span className='loginpage__summary-error'>{error}</span>
-    </div>}
+    {captchaUrl && (
+      <div className='loginpage__captcha'>
+        <img src={captchaUrl} alt="captcha"/>
+        <span>Введите код с картинки</span>
+        {createField(
+          'captcha',
+          '',
+          '',
+          [requiredFields],
+          RenderInput,
+          'text')}
+      </div>)}
+    <span className='loginpage__summary-error'>{error}</span>
     <div className='loginpage__buttonblock'>
       <button className={isFetching || loginSucceeded ? 'disabled' : ''} type='submit' disabled={isFetching}>Sign in
       </button>

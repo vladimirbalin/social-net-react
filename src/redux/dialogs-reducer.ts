@@ -19,10 +19,10 @@ let initialState = {
     {id: 3, message: 'Mkay'},
   ] as Array<DialogsMessages>
 };
-export type InitialStateType = typeof initialState;
+export type DialogsStateType = typeof initialState;
 
-const dialogsReducer = (state: InitialStateType = initialState,
-                        action: AddMessageActionType): InitialStateType => {
+const dialogsReducer = (state = initialState,
+                        action: DialogsActionsType): DialogsStateType => {
   switch (action.type) {
     case ADD_MESSAGE:
       return {
@@ -39,6 +39,7 @@ const dialogsReducer = (state: InitialStateType = initialState,
       return state;
   }
 };
+type DialogsActionsType = AddMessageActionType;
 
 type AddMessageActionType = {
   type: typeof ADD_MESSAGE

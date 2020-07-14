@@ -12,12 +12,13 @@ import {
 } from "../../redux/profile-reducer";
 import { compose } from "redux";
 import { Redirect } from 'react-router-dom';
+import { withHeader } from "../common/hocs/withHeader/withHeader";
 
 class ProfileContainer extends React.Component {
-  refreshProfile(){
+  refreshProfile() {
     const urlId = this.props.match.params.userID;
     const userId = this.props.userId;
-    if(urlId){
+    if (urlId) {
       this.props.setUserProfileThunk(urlId);
       this.props.getUserStatusThunk(urlId);
     } else if (this.props.isAuth) {
@@ -25,21 +26,25 @@ class ProfileContainer extends React.Component {
       this.props.getUserStatusThunk(userId);
     }
   }
+
   componentDidMount() {
     this.refreshProfile();
   };
-  componentDidUpdate(prevProps){
-    if(prevProps.match.params.userID !== this.props.match.params.userID){
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.userID !== this.props.match.params.userID) {
       this.refreshProfile();
     }
   }
 
   render() {
-    const { profile, status, setUserStatusThunk, setUserAvatarThunk, isAuth,
-      isFetchingAvatar, isFetchingProfileInfo, saveProfile, isProfileInfoTransmitted, setProfileInfoTransmitted } = this.props;
-    return !(this.props.match.params.userID || this.props.userId) ? 
-      <Redirect to='/login'/> :      
-      <Profile profile={profile}
+    const {
+      profileInfo, status, setUserStatusThunk, setUserAvatarThunk, isAuth,
+      isFetchingAvatar, isFetchingProfileInfo, saveProfile, isProfileInfoTransmitted, setProfileInfoTransmitted
+    } = this.props;
+    return !(this.props.match.params.userID || this.props.userId) ?
+      <Redirect to='/login'/> :
+      <Profile profile={profileInfo}
                status={status}
                setUserStatusThunk={setUserStatusThunk}
                setUserAvatarThunk={setUserAvatarThunk}
@@ -54,20 +59,33 @@ class ProfileContainer extends React.Component {
   };
 }
 
-const mapStateToProps = (state) => ({
-  profile: state.profileComp.profileInfo,
-  profileInfoTable: state.profileComp.profileInfoTable,
-  status: state.profileComp.status,
-  userId: state.auth.userId,
-  isAuth: state.auth.isAuth,
-  isFetchingAvatar: state.profileComp.isFetchingAvatar,
-  isFetchingProfileInfo: state.profileComp.isFetchingProfileInfo,
-  isProfileInfoTransmitted: state.profileComp.isProfileInfoTransmitted,
-});
-const mapDispatchToProps = {setUserProfile, setUserProfileThunk, getUserStatusThunk, setUserStatusThunk, setUserAvatarThunk,
-  saveProfile, setProfileInfoTransmitted};
+const mapStateToProps = (state) => {
+  const {
+    profileInfo,
+    status,
+    isFetchingAvatar,
+    isFetchingProfileInfo,
+    isProfileInfoTransmitted
+  } = state.profileComp;
+  const { userId, isAuth } = state.auth;
+  return {
+    profileInfo,
+    status,
+    userId,
+    isAuth,
+    isFetchingAvatar,
+    isFetchingProfileInfo,
+    isProfileInfoTransmitted
+  }
+};
+const mapDispatchToProps = {
+  setUserProfile, setUserProfileThunk, getUserStatusThunk,
+  setUserStatusThunk, setUserAvatarThunk,
+  saveProfile, setProfileInfoTransmitted
+};
 
 
 export default compose(
+  withHeader,
   connect(mapStateToProps, mapDispatchToProps),
 )(ProfileContainer);

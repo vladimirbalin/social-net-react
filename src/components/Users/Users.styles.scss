@@ -36,6 +36,7 @@
 
   &__left {
     align-items: center;
+    min-width: 157px;
   }
 
   &__pages {
@@ -47,53 +48,37 @@
   &__links {
     color: #000000;
     text-decoration: none;
-    transition: 0.3s color;
     font-family: Fira Sans, sans-serif;
     display: block;
     width: 100%;
     padding: 5px 0;
-    border: 1px solid darkgray;
-    border-radius: 3px;
+    border-top: 1px solid #c68f7d;
+    border-bottom: 1px solid #c68f7d;
   }
 
-  &__pbutton {
-    text-align: center;
-    background-color: #f5f1f3;
+  &__btn-paginator {
     font-size: 15px;
     min-width: 40px;
-    cursor: pointer;
-    transition: .3s background-color;
-    margin-right: 2px;
-  }
+    text-align: center;
+    background-color: #f5f1f3;
 
-  button,
-  button:disabled:hover {
-    display: block;
-    width: 117px;
-    margin: 10px 20px;
-    padding: 10px 30px;
-    position: relative;
-    border: 2px solid #c68f7d;
-    background-color: rgb(248, 236, 236);
-    color: #293380;
-    font-family: 'Montserrat', sans-serif;
-    transition: .4s background-color;
-    cursor: pointer;
-  }
+    &.disabled, &.disabled:hover {
+      opacity: .3;
+      background-color: #f5f1f3;
 
-  button:hover {
-    background-color: #c68f7d;
-    color: #fff;
-  }
+      .users__links {
+        color: #000000;
+        cursor: not-allowed;
+      }
+    }
 
-  button:disabled {
-    opacity: .3;
-  }
+    .users__links[aria-label='Go to last page'] {
+      border-right: 1px solid #c68f7d;
+    }
 
-  &__selected,
-  &__pbutton:hover {
-    background-color: #9b413f;
-    cursor: pointer;
+    .users__links[aria-label='Go to first page'] {
+      border-left: 1px solid #c68f7d;
+    }
   }
 
   &__selected,
@@ -102,7 +87,39 @@
     cursor: default;
   }
 
+  &__selected,
+  &__btn-paginator:hover {
+    background-color: #9b413f;
+  }
+
   &__links:hover {
     color: #ffffff;
   }
+
+  .btn,
+  .btn:disabled:hover {
+    display: block;
+    width: 117px;
+    margin: 10px 20px;
+    padding: 10px 30px;
+    position: relative;
+    border: 1px solid #c68f7d;
+    background-color: rgb(248, 236, 236);
+    color: #293380;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .btn:hover {
+    background-color: #c68f7d;
+    color: #fff;
+    &.fetching{
+      cursor: default;
+    }
+  }
+
+  .btn:disabled {
+    opacity: .3;
+  }
+
+
 }

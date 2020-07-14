@@ -11,15 +11,9 @@ const instance = axios.create(
 );
 
 export const UsersAPI = {
-  async setUsers(currentPage, pageSize){
-    const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
+  async setUsers(currentPage, itemsCountPerPage){
+    const response = await instance.get(`users?page=${currentPage}&count=${itemsCountPerPage}`);
     return response.data;
-  },
-  pageClicked(pageClicked, pageSize){
-    return instance.get(`users?page=${pageClicked}&count=${pageSize}`)
-      .then(response => {
-        return response.data;
-      })
   },
   follow(userId){
     return instance.post(`follow/${userId}`, {})
