@@ -1,13 +1,22 @@
 import React from 'react';
 import './Loader.styles.scss';
-import loaderSvg from '../../../assets/img/loader.svg';
+import { ReactComponent as LoaderSvg } from '../../../assets/img/loader.svg';
 
-const Loader: React.FC = () => {
+type OwnProps = {
+  fill?: string;
+  width?: string;
+  height?: string;
+};
+const Loader: React.FC<OwnProps> = ({
+  fill = '#c68f7d',
+  width = '64px',
+  height = '64px',
+}) => {
   return (
-    <div className='preloader'>
-      <img src={loaderSvg} alt='loader' />
+    <div className="preloader">
+      <LoaderSvg fill={fill} width={width} height={height} />
     </div>
-  )
+  );
 };
 
 export default Loader;

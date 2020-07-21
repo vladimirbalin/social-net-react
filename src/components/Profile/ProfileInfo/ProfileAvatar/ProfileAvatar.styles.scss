@@ -1,4 +1,4 @@
-.profile__avatar-block{
+.profile__avatar-block {
   min-height: 122.4px;
   margin-bottom: 15px;
   padding-left: 150px;
@@ -16,27 +16,27 @@
     position: absolute;
     z-index: -1;
   }
-  label{
+  label {
     cursor: pointer;
     display: block;
     padding-left: 7px;
     font-size: 13px;
-    opacity: .5;
-    transition: opacity .3s;
+    opacity: 0.5;
+    transition: opacity 0.3s;
     border: 1px solid transparent;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     width: 102px;
-    img{
+    img {
       width: 30px;
       height: 30px;
-      transition: opacity .2s;
+      transition: opacity 0.2s;
     }
-    img:hover{
-      opacity: .5;
+    img:hover {
+      opacity: 0.5;
     }
   }
-  label:hover{
+  label:hover {
     opacity: 1;
     border: 1px solid gray;
     background-color: bisque;

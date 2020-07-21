@@ -1,5 +1,5 @@
-.profile{
-  &__item{
+.profile {
+  &__item {
     display: flex;
   }
   &__subtitles {
@@ -10,14 +10,14 @@
     text-align: right;
     margin-right: 10px;
   }
-  &__descr{
+  &__descr {
     font-size: 15px;
   }
-  &__item{
-    .form-wrap{
+  &__item {
+    .form-wrap {
       display: flex;
       width: 100%;
-      label{
+      label {
         order: 1;
         color: #828282;
         font-size: 16px;
@@ -26,7 +26,7 @@
         text-align: right;
         margin-right: 10px;
       }
-      input{
+      input {
         order: 2;
       }
     }

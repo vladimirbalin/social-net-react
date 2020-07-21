@@ -1,9 +1,10 @@
-button{
-  margin: 0;
-  &:disabled{
-    opacity: .3;
-    cursor: not-allowed;
+.users {
+  button {
+    margin: 0;
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    outline: none;
   }
-  outline: none;
 }
-

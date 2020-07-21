@@ -1,18 +1,12 @@
-import React from "react";
-import Header from "./Header";
-import { connect } from "react-redux";
-import { logoutThunk } from "../../redux/auth-reducer";
+import React from 'react';
+import Header from './Header';
+import { connect } from 'react-redux';
+import { logoutThunk } from '../../redux/auth-reducer';
 
 class HeaderContainer extends React.Component {
   render() {
     const { isAuth, logoutThunk, login } = this.props;
-    return (
-      <Header
-        isAuth={isAuth}
-        logoutThunk={logoutThunk}
-        login={login}
-      />
-    );
+    return <Header isAuth={isAuth} logoutThunk={logoutThunk} login={login} />;
   }
 }
 

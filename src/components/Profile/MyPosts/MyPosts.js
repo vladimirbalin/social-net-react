@@ -1,8 +1,7 @@
 import React from 'react';
 import './MyPosts.styles.scss';
-import Post from "./Post/Post";
-import MyPostsForm from "./MyPostsForm";
-
+import Post from './Post/Post';
+import MyPostsForm from './MyPostsForm';
 
 const MyPosts = ({ addPost, posts }) => {
   const clickHandler = (formData) => {
@@ -11,13 +10,11 @@ const MyPosts = ({ addPost, posts }) => {
   };
 
   return (
-    <section className='my-posts'>
-
-        <MyPostsForm onSubmit={clickHandler}/>
-        {posts.map(el => <Post message={el.message}
-                                  likes={el.likesCount}
-                                  key={el.id}/>)}
-      
+    <section className="my-posts">
+      <MyPostsForm onSubmit={clickHandler} />
+      {posts.map((el) => (
+        <Post message={el.message} likes={el.likesCount} key={el.id} />
+      ))}
     </section>
   );
 };

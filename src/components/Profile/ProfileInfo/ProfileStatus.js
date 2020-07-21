@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 export default function ProfileStatus({ status, setUserStatusThunk }) {
   let [editMode, setMode] = useState(false);
@@ -17,19 +17,25 @@ export default function ProfileStatus({ status, setUserStatusThunk }) {
   };
 
   return (
-    <div className='profile__item'>
+    <div className="profile__item">
       {!editMode && (
-          <>
-            <span className='profile__subtitles'
-                onDoubleClick={() => setMode(true)}>status: </span>
-            <span className='profile__descr'>{status}</span>
-          </>
+        <>
+          <span
+            className="profile__subtitles"
+            onDoubleClick={() => setMode(true)}
+          >
+            status:{' '}
+          </span>
+          <span className="profile__descr">{status}</span>
+        </>
       )}
       {editMode && (
         <div>
-          <input onBlur={() => {
-            setMode(false);
-            sendHandler();}}
+          <input
+            onBlur={() => {
+              setMode(false);
+              sendHandler();
+            }}
             onChange={changeHandler}
             value={tempStatus}
             autoFocus={true}

@@ -1,5 +1,4 @@
 .users {
-
   &__item,
   &__name,
   &__right,
@@ -46,14 +45,14 @@
   }
 
   &__links {
-    color: #000000;
+    color: black;
     text-decoration: none;
     font-family: Fira Sans, sans-serif;
     display: block;
     width: 100%;
     padding: 5px 0;
-    border-top: 1px solid #c68f7d;
-    border-bottom: 1px solid #c68f7d;
+    // border-top: 1px solid #c68f7d;
+    // border-bottom: 1px solid #c68f7d;
   }
 
   &__btn-paginator {
@@ -62,12 +61,12 @@
     text-align: center;
     background-color: #f5f1f3;
 
-    &.disabled, &.disabled:hover {
-      opacity: .3;
+    &.disabled,
+    &.disabled:hover {
+      opacity: 0.3;
       background-color: #f5f1f3;
 
       .users__links {
-        color: #000000;
         cursor: not-allowed;
       }
     }
@@ -85,41 +84,42 @@
   &__selected:hover {
     color: #ffffff;
     cursor: default;
+    .users__links {
+      color: #ffffff;
+    }
   }
 
   &__selected,
   &__btn-paginator:hover {
-    background-color: #9b413f;
+    background-color: #c68f7d;
   }
 
   &__links:hover {
     color: #ffffff;
   }
 
-  .btn,
-  .btn:disabled:hover {
-    display: block;
-    width: 117px;
-    margin: 10px 20px;
-    padding: 10px 30px;
-    position: relative;
-    border: 1px solid #c68f7d;
-    background-color: rgb(248, 236, 236);
-    color: #293380;
-    font-family: 'Montserrat', sans-serif;
-  }
+  // .btn,
+  // .btn:disabled:hover {
+  //   display: block;
+  //   width: 117px;
+  //   margin: 10px 20px;
+  //   padding: 10px 30px;
+  //   position: relative;
+  //   border: 1px solid #c68f7d;
+  //   background-color: rgb(248, 236, 236);
+  //   color: #293380;
+  //   font-family: 'Montserrat', sans-serif;
+  // }
 
-  .btn:hover {
-    background-color: #c68f7d;
-    color: #fff;
-    &.fetching{
-      cursor: default;
-    }
-  }
+  // .btn:hover {
+  //   background-color: #c68f7d;
+  //   color: #fff;
+  //   &.fetching {
+  //     cursor: default;
+  //   }
+  // }
 
-  .btn:disabled {
-    opacity: .3;
-  }
-
-
+  // .btn:disabled {
+  //   opacity: 0.3;
+  // }
 }

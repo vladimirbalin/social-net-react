@@ -1,7 +1,11 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { maxLengthValidate, requiredFields } from "../../../services/validators";
-import { RenderTextarea } from "../../common/FormControls/FormControls";
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import {
+  maxLengthValidate,
+  requiredFields,
+} from '../../../services/validators';
+import { RenderTextarea } from '../../common/FormControls/FormControls';
+import Button from '../../common/Button/Button';
 
 const maxLength10 = maxLengthValidate(10);
 
@@ -15,8 +19,8 @@ const MyPostsForm = ({ handleSubmit }) => (
       placeholder="add your post here..."
       validate={[requiredFields, maxLength10]}
     />
-    <button type="submit">Add post</button>
+    <Button small>Add post</Button>
   </form>
 );
 
-export default reduxForm({ form: "myPostsForm" })(MyPostsForm);
+export default reduxForm({ form: 'myPostsForm' })(MyPostsForm);

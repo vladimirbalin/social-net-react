@@ -1,4 +1,4 @@
-.not-found{
+.not-found {
   width: 100%;
   height: 100%;
   color: #06e7ff;
@@ -8,15 +8,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &__block{
+  &__block {
     width: 50vw;
     padding: 20px;
     height: max-content;
     border: 1px solid mistyrose;
   }
-  &__goback{
+  &__goback {
     cursor: pointer;
-    text-decoration: underline;  
+    text-decoration: underline;
   }
 }
-

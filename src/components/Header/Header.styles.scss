@@ -1,11 +1,17 @@
-.header{
-  background: rgb(236,236,245);
-  background: linear-gradient(41deg, rgba(236,236,245,1) 16%, rgba(198,143,125,1) 83%);
-  box-shadow: 0px 0px 40px 2px rgba(0,0,0,0.25);
-  height: 2.8em;
+.header {
+  padding: 5px 0;
+  background: rgb(236, 236, 245);
+  background: linear-gradient(
+    41deg,
+    rgba(236, 236, 245, 1) 16%,
+    rgba(198, 143, 125, 1) 83%
+  );
+  box-shadow: 0px 0px 40px 2px rgba(0, 0, 0, 0.25);
+  height: 7.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   &__logo {
     padding-left: 20px;
     width: 100px;
@@ -13,25 +19,8 @@
   span {
     color: mistyrose;
   }
-  &__login{
+  &__login {
     margin: 0 15px 5px 0;
-    float: right;   
-    button{
-      text-decoration: none;
-      border: 1px solid mistyrose;
-      background-color: #c68f7d;
-      color: white;
-      font-family: 'Montserrat', sans-serif;
-      transition: .4s;
-      cursor: pointer;
-      height: 1.5em;
-      padding-top: 2px;
-      margin: 0;
-      padding: 2px 5px;
-      &:hover{
-        background-color: mistyrose;
-        color: black;
-      }
-    } 
+    float: right;
   }
 }

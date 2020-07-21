@@ -1,30 +1,29 @@
-.form-wrap{
-  textarea{
+.form-wrap {
+  textarea {
     resize: none;
     border: 2px solid transparent;
-    transition: .5s border-color;
+    transition: 0.5s border-color;
   }
-  &__active{
-    animation: .5s ticking;
+  &__active {
+    animation: 0.5s ticking;
     margin-left: 10px;
   }
-  &.error{  
-    textarea{
+  &.error {
+    textarea {
       border-color: red;
     }
-    input{
+    input {
       border: 2px solid red;
-    }  
-    span{
+    }
+    span {
       color: red;
-      svg{
+      svg {
         margin-right: 5px;
         margin-bottom: -2px;
       }
     }
   }
 }
-
 
 @keyframes ticking {
   0% {

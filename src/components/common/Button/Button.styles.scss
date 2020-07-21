@@ -1,0 +1,34 @@
+.btn {
+  min-width: 90px;
+  height: 40px;
+  background-color: #c68f7d;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 0;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #a76b56;
+    cursor: pointer;
+  }
+  &.disabled {
+    opacity: 0.5;
+    cursor: progress;
+  }
+  &.reversed {
+    background-color: white;
+    border: 1px solid #c68f7d;
+    color: #c68f7d;
+    &:hover {
+      background-color: #c68f7d;
+      color: white;
+      border: 1px solid white;
+    }
+  }
+  &.small {
+    height: 27.6px;
+  }
+}

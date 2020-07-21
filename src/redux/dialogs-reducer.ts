@@ -2,37 +2,44 @@ const ADD_MESSAGE = 'dialogs/ADD-MESSAGE';
 
 let id = 100;
 
-type DialogsNames = { id: number, name: string };
-type DialogsMessages = { id: number, message: string };
+type DialogsNames = { id: number; name: string };
+type DialogsMessages = { id: number; message: string };
 
 let initialState = {
   dialogsNames: [
-    {id: 1, name: 'Dmitriy'},
-    {id: 2, name: 'Valeriy'},
-    {id: 3, name: 'Ivan'},
-    {id: 4, name: 'Dasha'},
-    {id: 5, name: 'Maria'},
+    { id: 1, name: 'Dmitriy' },
+    { id: 2, name: 'Valeriy' },
+    { id: 3, name: 'Ivan' },
+    { id: 4, name: 'Dasha' },
+    { id: 5, name: 'Maria' },
   ] as Array<DialogsNames>,
   dialogsMessages: [
-    {id: 1, message: 'Hi'},
-    {id: 2, message: 'Howre doing Howre doing Howre doing Howre doing Howre doing Howre doing'},
-    {id: 3, message: 'Mkay'},
-  ] as Array<DialogsMessages>
+    { id: 1, message: 'Hi' },
+    {
+      id: 2,
+      message:
+        'Howre doing Howre doing Howre doing Howre doing Howre doing Howre doing',
+    },
+    { id: 3, message: 'Mkay' },
+  ] as Array<DialogsMessages>,
 };
 export type DialogsStateType = typeof initialState;
 
-const dialogsReducer = (state = initialState,
-                        action: DialogsActionsType): DialogsStateType => {
+const dialogsReducer = (
+  state = initialState,
+  action: DialogsActionsType
+): DialogsStateType => {
   switch (action.type) {
     case ADD_MESSAGE:
       return {
         ...state,
-        dialogsMessages: [...state.dialogsMessages,
+        dialogsMessages: [
+          ...state.dialogsMessages,
           {
             id: id++,
-            message: action.payload
-          }
-        ]
+            message: action.payload,
+          },
+        ],
       };
 
     default:
@@ -42,9 +49,12 @@ const dialogsReducer = (state = initialState,
 type DialogsActionsType = AddMessageActionType;
 
 type AddMessageActionType = {
-  type: typeof ADD_MESSAGE
-  payload: string
-}
-export const sendMessage = (text: string): AddMessageActionType => ({type: ADD_MESSAGE, payload: text});
+  type: typeof ADD_MESSAGE;
+  payload: string;
+};
+export const sendMessage = (text: string): AddMessageActionType => ({
+  type: ADD_MESSAGE,
+  payload: text,
+});
 
 export default dialogsReducer;
